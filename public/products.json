@@ -1,0 +1,7 @@
+[
+  { "id": 1, "title": "asd", "text": "dd", "price": 200 },
+  { "id": 2, "title": "qwe", "text": "get it", "price": 300 },
+  { "id": 3, "title": "zxc", "text": "cool", "price": 400 },
+  { "id": 4, "title": "asd", "text": "бб", "price": 1200 },
+  { "id": 5, "title": "qwe", "text": "Hi", "price": 750 }
+]
