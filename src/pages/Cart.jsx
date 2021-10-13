@@ -10,16 +10,11 @@ const { Content } = Layout;
 const Cart = () => {
 
   const { items, totalPrice } = useSelector(state => state.cart)
-  const { removeItem, getSum } = useActions(cartActionCreators)
+  const { removeCartItem } = useActions(cartActionCreators)
 
-  function removeCartItem(id) {
-    removeItem(id)
-    getSum()
+  function removeItem(id) {
+    removeCartItem(id, items)
   }
-
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(items))
-  }, [items])
 
   return (
     <Layout>
@@ -29,7 +24,7 @@ const Cart = () => {
           <>
             <div>
               {items.map(item =>
-                <CartItems card={item} key={item.id} onClick={removeCartItem} />
+                <CartItems card={item} key={item.id} onClick={removeItem} />
               )}
             </div>
             <h1>{totalPrice}</h1>

@@ -1,16 +1,18 @@
 import { Card, Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { PRODUCT } from '../data/pages';
 
-const ProductCard = ({ card, onClick }) => {
+const ProductCard = ({ card, onClick, push }) => {
 
   const [isAdd, setIsAdd] = useState(false)
   const { items } = useSelector(state => state.cart)
+  const history = useHistory()
 
   function setItem() {
     onClick(card)
     setIsAdd(!isAdd)
-    
   }
 
   useEffect(() => {
@@ -36,6 +38,9 @@ const ProductCard = ({ card, onClick }) => {
       >
         Добавить в корзину
       </Button>
+      <Button onClick={() => history.push(PRODUCT + '/' + card.id)} style={{marginTop: 10,}}>
+        Подробнее
+      </Button> 
     </Card>
   )
 }
