@@ -1,7 +1,7 @@
 import { Layout, Menu, Row } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { CART, LOGIN, PRODUCTS } from '../data/pages';
+import { CART, LOGIN, POSTS, PRODUCTS } from '../data/pages';
 import { useActions } from '../hooks/useActions';
 import { AuthActionCreators } from '../redux/reducers/login/actionCreators';
 
@@ -16,14 +16,15 @@ const Header = ({onClick}) => {
       <Row justify='end'>
         {state.login.isAuth
           ?
-          <Menu theme="dark" mode="horizontal">
-            <Menu.Item key='1' onClick={() => history.push(PRODUCTS)}>Товары</Menu.Item>
-            <Menu.Item key='2' style={{pointerEvents: 'none'}}>{state.login.user.username}</Menu.Item>
-            <Menu.Item key='3' onClick={() => logout()}>Выйти</Menu.Item>
-            <Menu.Item key='4' onClick={() => history.push(CART)}>{state.cart.items.length} Корзина</Menu.Item>
+          <Menu disabledOverflow={true} theme="dark" mode="horizontal">
+            <Menu.Item key='1' onClick={() => history.push(POSTS)}>Посты</Menu.Item>
+            <Menu.Item key='2' onClick={() => history.push(PRODUCTS)}>Товары</Menu.Item>
+            <Menu.Item key='3' style={{pointerEvents: 'none'}}>{state.login.user.username}</Menu.Item>
+            <Menu.Item key='4' onClick={() => logout()}>Выйти</Menu.Item>
+            <Menu.Item key='5' onClick={() => history.push(CART)}>{state.cart.items.length} Корзина</Menu.Item>
           </Menu>
           :
-          <Menu theme="dark" mode="horizontal">
+          <Menu disabledOverflow={true} theme="dark" mode="horizontal">
             <Menu.Item key='1' onClick={() => history.push(PRODUCTS)}>Товары</Menu.Item>
             <Menu.Item key='2' onClick={() => history.push(LOGIN)}>Логин</Menu.Item>
             <Menu.Item key='3' onClick={onClick}>Корзина</Menu.Item>

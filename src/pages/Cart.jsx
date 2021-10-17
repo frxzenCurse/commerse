@@ -1,5 +1,4 @@
 import { Layout } from 'antd';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CartItems from '../components/CartItems';
 import { useActions } from '../hooks/useActions';
