@@ -7,6 +7,7 @@ import { useSearch } from '../hooks/useSearch';
 import { useSelector } from 'react-redux';
 import { useActions } from '../hooks/useActions';
 import { productsActionCreators } from '../redux/reducers/products/actionCreators';
+import Loader from "../components/Loader";
 
 const { Content } = Layout;
 
@@ -49,7 +50,7 @@ const Products = () => {
           ?
             <ProductList cards={searchedAndSortedCards} />
           :
-            <h1>Идет загрузка</h1>
+            <Loader />
         }
       </Content>
     </Layout>

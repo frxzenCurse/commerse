@@ -1,12 +1,13 @@
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Products from "./pages/Products";
-import { CART, LOGIN, PRODUCTS, POSTS, POST } from "./data/pages";
+import { CART, LOGIN, PRODUCTS, POSTS, POST, PAGE404 } from "./data/pages";
 import Posts from "./pages/Posts";
 import Post from "./pages/Post";
+import Page404 from "./pages/Page404";
 
 
-export const PUBLIC_ROUTES = [
+export const ROUTES = [
   {
     path: PRODUCTS,
     component: Products,
@@ -24,7 +25,11 @@ export const PUBLIC_ROUTES = [
     component: Posts,
   },
   {
-    path: POST,
+    path: POST + '/:id',
     component: Post,
+  },
+  {
+    path: PAGE404,
+    component: Page404,
   },
 ]

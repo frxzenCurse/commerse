@@ -19,10 +19,10 @@ code {
 }
 
 .item-enter {
-  opacity: 0;
+  max-height: 0;
 }
 .item-enter-active {
-  opacity: 1;
+  max-height: 200px;
   transition: 500ms ease-in;
 }
 .item-exit {
@@ -34,3 +34,7 @@ code {
   transition: 500ms ease-in;
 }
 
+#root {
+  min-width: 320px;
+  overflow-x: hidden;
+}

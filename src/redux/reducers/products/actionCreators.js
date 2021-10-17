@@ -10,7 +10,7 @@ export const productsActionCreators = {
       dispatch(productsActionCreators.setLoading(true))
 
       setTimeout(async () => {
-        const response = await axios.get('./products.json')
+        const response = await axios.get('/products.json')
         dispatch(productsActionCreators.setProducts(response.data))
       }, 400);
     } catch (e) {

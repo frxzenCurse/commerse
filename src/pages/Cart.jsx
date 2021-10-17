@@ -1,6 +1,7 @@
 import { Layout } from 'antd';
 import { useSelector } from 'react-redux';
 import CartItems from '../components/CartItems';
+import EmptyCart from '../components/EmptyCart';
 import { useActions } from '../hooks/useActions';
 import cartActionCreators from '../redux/reducers/cart/actionCreator';
 
@@ -29,7 +30,7 @@ const Cart = () => {
             <h1>{totalPrice}</h1>
           </>
           :
-          <h1>Корзина пока пуста</h1>
+          <EmptyCart />
         }
       </Content>
     </Layout>

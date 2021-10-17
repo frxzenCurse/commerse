@@ -3,24 +3,28 @@ import Filters from '../components/Filters';
 import Search from '../components/Search';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Row, Spin, Col, Pagination } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Row, Col, Pagination, Button } from 'antd';
 import { PostService } from '../API/PostService';
 import { useFetching } from '../hooks/useFetching';
 import { useSearch } from '../hooks/useSearch';
-
-const antIcon = <LoadingOutlined style={{ fontSize: 150, color: 'blue' }} spin />;
+import Loader from '../components/Loader';
+import MyModal from '../components/MyModal';
+import PostForm from '../components/PostForm';
 
 const Posts = () => {
+
+  const [isVisible, setIsVisible] = useState(false)
 
   const [posts, setPosts] = useState([])
   const [value, setValue] = useState('')
   const [selectedSort, setSelectedSort] = useState('')
   const searchedAndSortedPosts = useSearch(posts, selectedSort, value)
-  
+
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
+  const [title, setTitle] = useState('')
+  const [body, setBody] = useState('')  
 
   const [fetchPosts, isLoading, error] = useFetching(async () => {
     const response = await PostService.getPosts(limit, page)
@@ -37,10 +41,24 @@ const Posts = () => {
     setPosts([...posts].filter(item => item.id !== id))
   }
 
+  function modalHandler() {
+    setIsVisible(!isVisible)
+  }
+
+  function setNewPost() {
+    setPosts([{
+      id: Date.now(),
+      title: title,
+      body: body,
+    }, ...posts,])
+    setIsVisible(!isVisible)
+    setTitle('')
+    setBody('')
+  }
+
   useEffect(() => {
     fetchPosts()
   }, [page])
-
 
   return (
     <div style={{ margin: 40, paddingBottom: 40, }}>
@@ -54,6 +72,9 @@ const Posts = () => {
             ]}
             onChange={postSort}
           />
+          <div style={{ marginTop: 15 }}>
+            <Button onClick={modalHandler}>Добавить пост</Button>
+          </div>
         </Col>
         <Col span={18}>
           <Search value={value} onChange={(e) => setValue(e.target.value)} />
@@ -63,11 +84,9 @@ const Posts = () => {
         <h1 style={{ color: 'red' }}>{error}</h1>}
       {isLoading
         ?
-        <Row style={{ height: '80vh', }} justify='center' align='middle'>
-          <Spin indicator={antIcon} />
-        </Row>
+        <Loader />
         :
-          <PostList posts={searchedAndSortedPosts} removePost={removePost} />
+        <PostList posts={searchedAndSortedPosts} removePost={removePost} />
       }
       <Pagination
         style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}
@@ -75,6 +94,15 @@ const Posts = () => {
         showSizeChanger={false}
         total={(Math.ceil(totalCount / limit) * 10)}
         onChange={e => setPage(e)}
+      />
+      <PostForm 
+        isModalVisible={isVisible} 
+        handleOk={setNewPost} 
+        closeModal={modalHandler} 
+        title={title}
+        titleChange={(e) => setTitle(e.target.value)}
+        body={body}
+        bodyChange={(e) => setBody(e.target.value)}
       />
     </div>
   )

@@ -1,18 +1,27 @@
 import { Button, Card } from 'antd';
+import { useHistory } from 'react-router';
+import { POST } from '../data/pages';
 
-const PostItem = ({post, onClick}) => {
+const PostItem = ({ post, onClick }) => {
 
   function remove() {
     onClick(post.id)
   }
 
+  const history = useHistory()
+
   return (
     <div>
-      <Card type="inner" title={post.title} extra={<a href="#">More</a>} style={{marginTop: 20,}}>
+      <Card
+        type="inner"
+        title={post.title}
+        extra={<Button onClick={() => history.push(POST + '/' + post.id)}>Подробнее</Button>}
+        style={{ marginTop: 20, }}
+      >
         <div>{post.body}</div>
-        <Button 
+        <Button
           onClick={remove}
-          style={{marginTop: 10}}
+          style={{ marginTop: 10 }}
         >
           Удалить пост
         </Button>

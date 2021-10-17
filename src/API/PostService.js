@@ -8,5 +8,18 @@ export const PostService = {
         _page: page,
       }
     })
-  }
+  },
+  getSinglePost: (id) => {
+    return axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
+  },
+  getSingleImage: (id) => {
+    return axios.get('https://jsonplaceholder.typicode.com/photos/' + id)
+  },
+  getComments: (page = 1) => {
+    return axios.get('https://jsonplaceholder.typicode.com/comments', {
+      params: {
+        _page: page,
+      }
+    })
+  },
 }
