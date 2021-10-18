@@ -8,7 +8,6 @@ import { PostService } from '../API/PostService';
 import { useFetching } from '../hooks/useFetching';
 import { useSearch } from '../hooks/useSearch';
 import Loader from '../components/Loader';
-import MyModal from '../components/MyModal';
 import PostForm from '../components/PostForm';
 
 const Posts = () => {
@@ -23,8 +22,6 @@ const Posts = () => {
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')  
 
   const [fetchPosts, isLoading, error] = useFetching(async () => {
     const response = await PostService.getPosts(limit, page)

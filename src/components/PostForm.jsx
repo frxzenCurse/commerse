@@ -1,28 +1,34 @@
-import { Form, Input, Modal } from 'antd';
-import { useEffect, useState } from 'react';
+import { Button, Form, Input, Modal } from 'antd';
+import { useRef, useState } from 'react';
 
-const PostForm = ({ isModalVisible, handleOk, closeModal}) => {
+const PostForm = ({ isModalVisible, handleOk, closeModal }) => {
 
   const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')  
+  const [body, setBody] = useState('')
+  const ref = useRef()
 
   function submitForm() {
-    handleOk(title, body)
     setTitle('')
     setBody('')
+    handleOk(title, body)
+    ref.current.resetFields()
   }
 
-  console.log(title);
-  console.log(body);
-
   return (
-    <Modal title="Basic Modal" visible={isModalVisible} onOk={submitForm} onCancel={closeModal}>
+    <Modal
+      title='Введите данные'
+      visible={isModalVisible}
+      onCancel={closeModal}
+      footer={null}
+    >
       <Form
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         autoComplete="off"
+        onFinish={submitForm}
+        ref={ref}
       >
         <Form.Item
           label="Заголовок"
@@ -38,6 +44,12 @@ const PostForm = ({ isModalVisible, handleOk, closeModal}) => {
           rules={[{ required: true, message: 'Пожалуйста введите описание поста' }]}
         >
           <Input value={body} onChange={e => setBody(e.target.value)} />
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </Modal >

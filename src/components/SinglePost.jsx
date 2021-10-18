@@ -35,6 +35,7 @@ const SinglePost = ({ post, img, pageId }) => {
         <img
           style={{ width: 300, height: 300, }}
           src={img}
+          alt=''
         />
       }
     >

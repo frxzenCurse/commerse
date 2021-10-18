@@ -48,9 +48,9 @@ const Products = () => {
         </Row>
         {!loading
           ?
-            <ProductList cards={searchedAndSortedCards} />
+          <ProductList cards={searchedAndSortedCards} />
           :
-            <Loader />
+          <Loader />
         }
       </Content>
     </Layout>

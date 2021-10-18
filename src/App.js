@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom'
@@ -14,9 +15,15 @@ function App() {
   const { addItem, getSum } = useActions(cartActionCreators)
   const { isAuth } = useSelector(state => state.login)
   const [isVisible, setIsVisible] = useState(false)
+  const [theme, setTheme] = useState('light')
+  const ThemeContext = React.createContext(theme)
 
   function onClick() {
     setIsVisible(!isVisible)
+  }
+
+  function themeChange(event) {
+    setTheme(event)
   }
 
   useEffect(() => {
@@ -35,12 +42,15 @@ function App() {
     }
   }, [])
 
+
   return (
     <BrowserRouter>
-      <Header onClick={onClick} />
-      <AppRouter />
+      <Header onClick={onClick} themeChange={themeChange} />
+        {/* <ThemeContext.Provider value={theme}>
+        </ThemeContext.Provider> */}
+          <AppRouter />
       {!isAuth &&
-      <MyModal isModalVisible={isVisible} onClick={onClick} />}
+        <MyModal isModalVisible={isVisible} onClick={onClick} />}
     </BrowserRouter>
   );
 }
