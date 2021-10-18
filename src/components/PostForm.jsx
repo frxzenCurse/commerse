@@ -1,12 +1,22 @@
 import { Form, Input, Modal } from 'antd';
+import { useEffect, useState } from 'react';
 
-const PostForm = ({ isModalVisible, handleOk, closeModal, title, body, bodyChange, titleChange }) => {
+const PostForm = ({ isModalVisible, handleOk, closeModal}) => {
 
-  // const [title, setTitle] = useState('')
-  // const [body, setBody] = useState('')  
+  const [title, setTitle] = useState('')
+  const [body, setBody] = useState('')  
+
+  function submitForm() {
+    handleOk(title, body)
+    setTitle('')
+    setBody('')
+  }
+
+  console.log(title);
+  console.log(body);
 
   return (
-    <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={closeModal}>
+    <Modal title="Basic Modal" visible={isModalVisible} onOk={submitForm} onCancel={closeModal}>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -19,7 +29,7 @@ const PostForm = ({ isModalVisible, handleOk, closeModal, title, body, bodyChang
           name="title"
           rules={[{ required: true, message: 'Пожалуйста введите заголовок поста' }]}
         >
-          <Input value={title} onChange={titleChange} />
+          <Input value={title} onChange={e => setTitle(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -27,7 +37,7 @@ const PostForm = ({ isModalVisible, handleOk, closeModal, title, body, bodyChang
           name="body"
           rules={[{ required: true, message: 'Пожалуйста введите описание поста' }]}
         >
-          <Input value={body} onChange={bodyChange} />
+          <Input value={body} onChange={e => setBody(e.target.value)} />
         </Form.Item>
       </Form>
     </Modal >

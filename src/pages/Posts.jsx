@@ -45,15 +45,13 @@ const Posts = () => {
     setIsVisible(!isVisible)
   }
 
-  function setNewPost() {
+  function setNewPost(title, body) {
     setPosts([{
       id: Date.now(),
       title: title,
       body: body,
     }, ...posts,])
     setIsVisible(!isVisible)
-    setTitle('')
-    setBody('')
   }
 
   useEffect(() => {
@@ -99,10 +97,6 @@ const Posts = () => {
         isModalVisible={isVisible} 
         handleOk={setNewPost} 
         closeModal={modalHandler} 
-        title={title}
-        titleChange={(e) => setTitle(e.target.value)}
-        body={body}
-        bodyChange={(e) => setBody(e.target.value)}
       />
     </div>
   )
