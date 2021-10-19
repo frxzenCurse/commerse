@@ -19,15 +19,18 @@ const Posts = () => {
   const [selectedSort, setSelectedSort] = useState('')
   const searchedAndSortedPosts = useSearch(posts, selectedSort, value)
 
-  const [limit, setLimit] = useState(10)
+  const limit = 10
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
+  const [isMounted, setIsMounted] = useState(true) 
 
   const [fetchPosts, isLoading, error] = useFetching(async () => {
     const response = await PostService.getPosts(limit, page)
 
-    setTotalCount(response.headers['x-total-count'])
-    setPosts(response.data)
+    if (isMounted) {
+      setTotalCount(response.headers['x-total-count'])
+      setPosts(response.data)
+    }
   })
 
   function postSort(value) {
@@ -53,6 +56,9 @@ const Posts = () => {
 
   useEffect(() => {
     fetchPosts()
+
+    return () => setIsMounted(false)
+    // eslint-disable-next-line
   }, [page])
 
   return (
@@ -90,10 +96,10 @@ const Posts = () => {
         total={(Math.ceil(totalCount / limit) * 10)}
         onChange={e => setPage(e)}
       />
-      <PostForm 
-        isModalVisible={isVisible} 
-        handleOk={setNewPost} 
-        closeModal={modalHandler} 
+      <PostForm
+        isModalVisible={isVisible}
+        handleOk={setNewPost}
+        closeModal={modalHandler}
       />
     </div>
   )

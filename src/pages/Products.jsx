@@ -20,6 +20,7 @@ const Products = () => {
 
   useEffect(() => {
     fetchProducts()
+    // eslint-disable-next-line
   }, [])
 
   const searchedAndSortedCards = useSearch(products, selectedSort, value)

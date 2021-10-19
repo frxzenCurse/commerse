@@ -15,6 +15,7 @@ const ProductSlider = () => {
     if (!products.length) {
       fetchProducts()
     }
+    // eslint-disable-next-line
   }, [])
 
   return (

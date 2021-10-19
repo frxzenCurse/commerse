@@ -40,15 +40,16 @@ function App() {
       })
       getSum()
     }
+    // eslint-disable-next-line
   }, [])
 
 
   return (
     <BrowserRouter>
       <Header onClick={onClick} themeChange={themeChange} />
-        {/* <ThemeContext.Provider value={theme}>
-        </ThemeContext.Provider> */}
+        <ThemeContext.Provider value={theme}>
           <AppRouter />
+        </ThemeContext.Provider>
       {!isAuth &&
         <MyModal isModalVisible={isVisible} onClick={onClick} />}
     </BrowserRouter>
