@@ -8,6 +8,7 @@ import MyModal from './components/MyModal';
 import { useActions } from './hooks/useActions';
 import cartActionCreators from './redux/reducers/cart/actionCreator';
 import { AuthActionCreators } from './redux/reducers/login/actionCreators';
+import {ThemeContext} from './context/ThemeContext';
 
 function App() {
 
@@ -16,7 +17,6 @@ function App() {
   const { isAuth } = useSelector(state => state.login)
   const [isVisible, setIsVisible] = useState(false)
   const [theme, setTheme] = useState('light')
-  const ThemeContext = React.createContext(theme)
 
   function onClick() {
     setIsVisible(!isVisible)

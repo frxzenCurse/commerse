@@ -30,7 +30,7 @@ const Products = () => {
   }
 
   return (
-    <Layout style={{ margin: 40, }}>
+    <Layout style={{ margin: 40, background: 'white' }}>
       <Content>
         <Row>
           <Col span={6}>

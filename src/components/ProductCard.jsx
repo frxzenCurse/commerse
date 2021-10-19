@@ -12,6 +12,7 @@ const ProductCard = ({ card, onClick }) => {
     setIsAdd(!isAdd)
   }
 
+
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(items))
     // eslint-disable-next-line
