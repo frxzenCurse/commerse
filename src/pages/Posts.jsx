@@ -1,7 +1,7 @@
 import PostList from '../components/PostList';
 import Filters from '../components/Filters';
 import Search from '../components/Search';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { Row, Col, Pagination, Button } from 'antd';
 import { PostService } from '../API/PostService';
@@ -9,6 +9,7 @@ import { useFetching } from '../hooks/useFetching';
 import { useSearch } from '../hooks/useSearch';
 import Loader from '../components/Loader';
 import PostForm from '../components/PostForm';
+import { ThemeContext } from '../context/ThemeContext';
 
 const Posts = () => {
 
@@ -23,6 +24,8 @@ const Posts = () => {
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
   const [isMounted, setIsMounted] = useState(true) 
+
+  const context = useContext(ThemeContext)
 
   const [fetchPosts, isLoading, error] = useFetching(async () => {
     const response = await PostService.getPosts(limit, page)
@@ -74,7 +77,12 @@ const Posts = () => {
             onChange={postSort}
           />
           <div style={{ marginTop: 15 }}>
-            <Button onClick={modalHandler}>Добавить пост</Button>
+            <Button 
+              onClick={modalHandler}
+              type={context === 'light' ? 'primary' : ''}
+            >
+              Добавить пост
+            </Button>
           </div>
         </Col>
         <Col span={18}>

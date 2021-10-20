@@ -1,33 +1,43 @@
-import { Layout } from 'antd';
+import { Layout, Row, Typography } from 'antd';
 import { useSelector } from 'react-redux';
 import CartItems from '../components/CartItems';
 import EmptyCart from '../components/EmptyCart';
 import { useActions } from '../hooks/useActions';
 import cartActionCreators from '../redux/reducers/cart/actionCreator';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const { Content } = Layout;
 
 const Cart = () => {
 
   const { items, totalPrice } = useSelector(state => state.cart)
-  const { removeCartItem } = useActions(cartActionCreators)
+  const { removeItem, getSum } = useActions(cartActionCreators)
 
-  function removeItem(id) {
-    removeCartItem(id, items)
+  function removeCartItem(id) {
+    removeItem(id)
+    getSum()
   }
 
   return (
-    <Layout>
+    <Layout style={{background: '#fff'}}>
       <Content style={{ margin: 30, }}>
         {items.length
           ?
           <>
-            <div>
+            <TransitionGroup className="post-list">
               {items.map(item =>
-                <CartItems card={item} key={item.id} onClick={removeItem} />
+                <CSSTransition 
+                  key={item.id}
+                  timeout={1500}
+                  classNames="item"
+                >
+                <CartItems card={item} onClick={removeCartItem} />
+                </CSSTransition>
               )}
-            </div>
-            <h1>{totalPrice}</h1>
+            </TransitionGroup>
+            <Row justify='end' style={{marginTop: 30}}>
+              <Typography.Title>Общая сумма: {totalPrice} ₽</Typography.Title>
+            </Row>
           </>
           :
           <EmptyCart />

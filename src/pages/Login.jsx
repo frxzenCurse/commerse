@@ -15,13 +15,7 @@ const Login = () => {
 
   function sumbitHandler() {
     login(username, password)
-    // if (!error) {
-    // setUsername('')
-    // setPassword('')
-    // }
   }
-
-
 
   return (
     <Row justify='center' style={{ marginTop: 50, }}>

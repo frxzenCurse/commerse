@@ -12,12 +12,6 @@ const ProductCard = ({ card, onClick }) => {
     setIsAdd(!isAdd)
   }
 
-
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(items))
-    // eslint-disable-next-line
-  }, [isAdd])
-
   useEffect(() => {
     items.forEach(item => {
       if (item.id === card.id) {

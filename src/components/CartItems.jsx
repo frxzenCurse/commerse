@@ -1,6 +1,11 @@
 import { Card, Button } from 'antd';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+import Fade from 'react-reveal/Fade';
 
 const CartItems = ({ card, onClick }) => {
+
+  const context = useContext(ThemeContext)
 
   function removeItem() {
     onClick(card.id)
@@ -8,15 +13,17 @@ const CartItems = ({ card, onClick }) => {
 
   return (
     <div>
-      <Card
-        style={{ marginTop: 10, }}
-        type="inner"
-        title={card.title}
-        extra={<Button onClick={removeItem}>Убрать из корзины</Button>}
-      >
-        <p>{card.text}</p>
-        <p>{card.price}</p>
-      </Card>
+      <Fade bottom>
+        <Card
+          style={{ marginTop: 10, }}
+          type="inner"
+          title={card.title}
+          extra={<Button type={context === 'light' ? 'primary' : ''} onClick={removeItem}>Убрать из корзины</Button>}
+        >
+          <p>{card.text}</p>
+          <p>{card.price}</p>
+        </Card>
+      </Fade>
     </div>
   )
 }

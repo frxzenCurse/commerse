@@ -16,12 +16,19 @@ const getTotalSum = (arr) => {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CART_ITEM: {
+      const arr = [...state.items, action.payload]
+      localStorage.setItem('cartItems', JSON.stringify(arr))
+
       return {...state, items: [...state.items, action.payload]}
     }
-    case GET_TOTAL_SUM:
+    case GET_TOTAL_SUM: 
       return {...state, totalPrice: getTotalSum(state.items)}
-    case REMOVE_CART_ITEM:
+    case REMOVE_CART_ITEM: {
+      const arr = [...state.items].filter(item => item.id !== action.payload)
+      localStorage.setItem('cartItems', JSON.stringify(arr))
+
       return {...state,items: [...state.items].filter(item => item.id !== action.payload)}
+    }
     default:
       return state
   }
