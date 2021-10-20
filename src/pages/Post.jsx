@@ -1,10 +1,11 @@
 import { Button } from "antd";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router"
 import { PostService } from "../API/PostService";
 import Loader from "../components/Loader";
 import ProductSlider from "../components/ProductSlider";
 import SinglePost from "../components/SinglePost";
+import { ThemeContext } from "../context/ThemeContext";
 import { POSTS } from "../data/pages";
 import { useFetching } from "../hooks/useFetching";
 
@@ -16,6 +17,8 @@ const Post = () => {
 
   const url = useParams()
   const history = useHistory()
+
+  const context = useContext(ThemeContext)
 
   const [fetchPost, isLoading, error] = useFetching(async () => {
     const response = await PostService.getSinglePost(url.id)
@@ -36,7 +39,7 @@ const Post = () => {
 
 
   return (
-    <div style={{ margin: 60, }}>
+    <div style={{ padding: 60, transition: '.3s' }} className={context === 'dark' ? 'dark' : ''}>
       {error &&
         <h1 style={{ color: 'red' }}>{error}</h1>}
       {isLoading

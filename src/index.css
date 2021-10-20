@@ -38,3 +38,45 @@ code {
   min-width: 320px;
   overflow-x: hidden;
 }
+
+.dark {
+  background: #001529;
+}
+
+header.header-light {
+  background: #FFF;
+  border-bottom: 1px solid #f0f0f0;
+}
+header.header-dark {
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 65%);
+}
+
+.card-dark .ant-card {
+  color: rgba(255,255,255,0.85);
+  background: #001529;
+  border-color: #042470;
+}
+.card-dark .ant-card .ant-card-head {
+  background: #001529;
+  border-color: #042470;
+  color: rgba(255,255,255,0.85);
+}
+
+.input-dark input {
+  background: #001529;
+  border-color: #042470;
+  color: rgba(255,255,255,0.85);
+}
+
+.select-dark .ant-select .ant-select-selector {
+  background-color: #001529 !important;
+  border-color: #042470 !important;
+}
+.select-dark .ant-select .ant-select-selection-placeholder {
+  color: rgba(255,255,255,0.85);
+}
+.select-dark .ant-select .ant-select-arrow {
+  color: rgba(255,255,255,0.85);
+}

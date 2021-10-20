@@ -15,19 +15,19 @@ const PostItem = ({ post, onClick }) => {
   }
 
   return (
-    <div>
+    <div className={context === 'dark' ? 'card-dark' : ''}>
       <Fade bottom>
         <Card
           type="inner"
           title={post.title}
-          extra={<Button type={context === 'light' ? 'primary' : ''} onClick={() => history.push(POST + '/' + post.id)}>Подробнее</Button>}
+          extra={<Button type={context === 'light' ? 'light' : 'primary'} onClick={() => history.push(POST + '/' + post.id)}>Подробнее</Button>}
           style={{ marginTop: 20, }}
         >
           <div>{post.body}</div>
           <Button
             onClick={remove}
             style={{ marginTop: 10 }}
-            type={context === 'light' ? 'primary' : ''}
+            type={context === 'light' ? 'light' : 'primary'}
           >
             Удалить пост
           </Button>

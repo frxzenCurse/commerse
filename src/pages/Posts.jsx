@@ -65,7 +65,7 @@ const Posts = () => {
   }, [page])
 
   return (
-    <div style={{ margin: 40, paddingBottom: 40, }}>
+    <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }} className={context === 'dark' ? 'dark' : ''}>
       <Row>
         <Col span={6}>
           <Filters
@@ -79,7 +79,7 @@ const Posts = () => {
           <div style={{ marginTop: 15 }}>
             <Button 
               onClick={modalHandler}
-              type={context === 'light' ? 'primary' : ''}
+              type={context === 'light' ? 'light' : 'primary'}
             >
               Добавить пост
             </Button>

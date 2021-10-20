@@ -45,14 +45,14 @@ function App() {
 
 
   return (
-    <BrowserRouter>
-      <Header onClick={onClick} themeChange={themeChange} />
-        <ThemeContext.Provider value={theme}>
-          <AppRouter />
-        </ThemeContext.Provider>
-      {!isAuth &&
-        <MyModal isModalVisible={isVisible} onClick={onClick} />}
-    </BrowserRouter>
+    <ThemeContext.Provider value={theme}>
+      <BrowserRouter>
+        <Header onClick={onClick} themeChange={themeChange} />
+            <AppRouter />
+        {!isAuth &&
+          <MyModal isModalVisible={isVisible} onClick={onClick} />}
+      </BrowserRouter>
+    </ThemeContext.Provider>
   );
 }
 

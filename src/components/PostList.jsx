@@ -1,5 +1,5 @@
 import PostItem from "./PostItem"
-import { Typography } from 'antd';
+import { Empty } from 'antd';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const PostList = ({posts, removePost}) => {
@@ -19,7 +19,7 @@ const PostList = ({posts, removePost}) => {
             )}
           </TransitionGroup>
         :
-          <Typography.Title style={{ marginLeft: 10, }}>Постов пока нет!</Typography.Title>
+          <Empty />
       }
     </div>
   )

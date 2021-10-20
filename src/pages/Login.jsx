@@ -1,21 +1,30 @@
 import { Form, Input, Button, Row } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router';
+import { PRODUCTS } from '../data/pages';
 import { useActions } from '../hooks/useActions';
 import { AuthActionCreators } from '../redux/reducers/login/actionCreators';
 
-
 const Login = () => {
 
-  const { error, isLoading } = useSelector(state => state.login)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const { error, isLoading, isAuth } = useSelector(state => state.login)
   const { login } = useActions(AuthActionCreators)
+
+  const history = useHistory()
 
   function sumbitHandler() {
     login(username, password)
   }
+
+  useEffect(() => {
+    if (isAuth) {
+      history.push(PRODUCTS)
+    }
+  }, [isAuth])
 
   return (
     <Row justify='center' style={{ marginTop: 50, }}>
