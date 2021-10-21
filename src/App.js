@@ -24,6 +24,11 @@ function App() {
 
   function themeChange(event) {
     setTheme(event)
+    if (event === 'dark') {
+      document.body.classList.add('dark')
+    } else {
+      document.body.classList.remove('dark')
+    }
   }
 
   useEffect(() => {

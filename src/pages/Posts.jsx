@@ -65,7 +65,7 @@ const Posts = () => {
   }, [page])
 
   return (
-    <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }} className={context === 'dark' ? 'dark' : ''}>
+    <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }}>
       <Row>
         <Col span={6}>
           <Filters

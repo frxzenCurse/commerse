@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: .3s;
 }
 
 code {
@@ -63,6 +64,12 @@ header.header-dark {
   border-color: #042470;
   color: rgba(255,255,255,0.85);
 }
+.card-dark .ant-card-meta-title {
+  color: rgba(255,255,255,0.85);
+}
+.card-dark .ant-card-meta-description {
+  color: rgba(255,255,255,0.85);
+}
 
 .input-dark input {
   background: #001529;
@@ -70,6 +77,9 @@ header.header-dark {
   color: rgba(255,255,255,0.85);
 }
 
+.select-dark .ant-select {
+  color: rgba(255,255,255,0.85);
+}
 .select-dark .ant-select .ant-select-selector {
   background-color: #001529 !important;
   border-color: #042470 !important;
@@ -78,5 +88,63 @@ header.header-dark {
   color: rgba(255,255,255,0.85);
 }
 .select-dark .ant-select .ant-select-arrow {
+  color: rgba(255,255,255,0.85);
+}
+
+.list-dark .ant-list-item-meta-description {
+  color: rgba(255,255,255,0.85);
+}
+.list-dark .ant-list-item-meta-title {
+  color: rgba(255,255,255,0.85);
+}
+.list-dark .ant-list-split .ant-list-item {
+  border-color: #042470;
+}
+
+.modal-dark .ant-modal-header {
+  background: #001529;
+  border-color: #042470;
+}
+.modal-dark .ant-modal-title {
+  color: rgba(255,255,255,0.85);
+}
+.modal-dark .ant-modal-close {
+  color: rgba(255,255,255,0.85);
+}
+.modal-dark .ant-modal-close:hover {
+  color: rgba(255,255,255,0.85);
+}
+.modal-dark .ant-modal-content {
+  background-color: #001529;
+}
+.modal-dark .ant-form-item-required {
+  color: rgba(255,255,255,0.85);
+}
+.modal-dark .ant-modal-body {
+  color: rgba(255,255,255,0.85);
+}
+.modal-dark .ant-modal-footer {
+  border-color: #042470;
+}
+
+.empty-dark .ant-result-title {
+  color: rgba(255,255,255,0.85);
+}
+
+.form-dark .ant-form-item-required {
+  color: rgba(255,255,255,0.85);
+}
+.form-dark .ant-input {
+  background-color: #001529;
+  color: rgba(255,255,255,0.85);
+}
+.form-dark .ant-input#username {
+  border-color: #042470;
+}
+.form-dark .ant-input-affix-wrapper {
+  background-color: #001529;
+  border-color: #042470;
+}
+.form-dark .ant-input-password-icon {
   color: rgba(255,255,255,0.85);
 }

@@ -51,6 +51,7 @@ const Post = () => {
 
       <Button
         onClick={() => history.push(POSTS)}
+        type={context === 'light' ? 'light' : 'primary'}
       >
         Вернуться назад
       </Button>

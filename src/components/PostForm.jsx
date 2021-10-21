@@ -1,11 +1,13 @@
 import { Button, Form, Input, Modal } from 'antd';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 const PostForm = ({ isModalVisible, handleOk, closeModal }) => {
 
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const ref = useRef()
+  const context = useContext(ThemeContext)
 
   function submitForm() {
     setTitle('')
@@ -20,6 +22,7 @@ const PostForm = ({ isModalVisible, handleOk, closeModal }) => {
       visible={isModalVisible}
       onCancel={closeModal}
       footer={null}
+      className={context === 'dark' ? 'modal-dark' : ''}
     >
       <Form
         name="basic"
@@ -47,7 +50,7 @@ const PostForm = ({ isModalVisible, handleOk, closeModal }) => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" type={context === 'light' ? 'light' : 'primary'}>
             Submit
           </Button>
         </Form.Item>

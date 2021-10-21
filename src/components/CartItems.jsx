@@ -12,13 +12,13 @@ const CartItems = ({ card, onClick }) => {
   }
 
   return (
-    <div>
+    <div className={context === 'dark' ? 'card-dark' : ''}>
       <Fade bottom>
         <Card
           style={{ marginTop: 10, }}
           type="inner"
           title={card.title}
-          extra={<Button type={context === 'light' ? 'primary' : ''} onClick={removeItem}>Убрать из корзины</Button>}
+          extra={<Button type={context === 'dark' ? 'primary' : 'light'} onClick={removeItem}>Убрать из корзины</Button>}
         >
           <p>{card.text}</p>
           <p>{card.price}</p>

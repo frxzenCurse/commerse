@@ -33,32 +33,30 @@ const Products = () => {
   }
 
   return (
-    <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }} className={context === 'dark' ? 'dark' : ''}>
-      {/* <Layout style={{ margin: 40, background: 'white' }}> */}
-        <Content>
-          <Row>
-            <Col span={6}>
-              <Filters
-                placeholder='Сортировка'
-                options={[
-                  { value: 'title', name: 'По названию' },
-                  { value: 'text', name: 'По описанию' },
-                ]}
-                onChange={sortCards}
-              />
-            </Col>
-            <Col span={18}>
-              <Search value={value} onChange={(e) => setValue(e.target.value)} />
-            </Col>
-          </Row>
-          {!loading
-            ?
-            <ProductList cards={searchedAndSortedCards} />
-            :
-            <Loader />
-          }
-        </Content>
-      {/* </Layout> */}
+    <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }}>
+      <Content>
+        <Row>
+          <Col span={6}>
+            <Filters
+              placeholder='Сортировка'
+              options={[
+                { value: 'title', name: 'По названию' },
+                { value: 'text', name: 'По описанию' },
+              ]}
+              onChange={sortCards}
+            />
+          </Col>
+          <Col span={18}>
+            <Search value={value} onChange={(e) => setValue(e.target.value)} />
+          </Col>
+        </Row>
+        {!loading
+          ?
+          <ProductList cards={searchedAndSortedCards} />
+          :
+          <Loader />
+        }
+      </Content>
     </div>
   )
 }

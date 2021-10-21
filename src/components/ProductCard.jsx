@@ -7,11 +7,14 @@ const ProductCard = ({ card, onClick }) => {
 
   const [isAdd, setIsAdd] = useState(false)
   const { items } = useSelector(state => state.cart)
+  const {isAuth} = useSelector(state => state.login)
   const context = useContext(ThemeContext)
 
   function setItem() {
-    onClick(card)
-    setIsAdd(!isAdd)
+    if (isAuth) {
+      onClick(card)
+      setIsAdd(!isAdd)
+    }
   }
 
   useEffect(() => {

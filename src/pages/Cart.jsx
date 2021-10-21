@@ -5,6 +5,8 @@ import EmptyCart from '../components/EmptyCart';
 import { useActions } from '../hooks/useActions';
 import cartActionCreators from '../redux/reducers/cart/actionCreator';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 const { Content } = Layout;
 
@@ -12,6 +14,7 @@ const Cart = () => {
 
   const { items, totalPrice } = useSelector(state => state.cart)
   const { removeItem, getSum } = useActions(cartActionCreators)
+  const context = useContext(ThemeContext)
 
   function removeCartItem(id) {
     removeItem(id)
@@ -19,7 +22,7 @@ const Cart = () => {
   }
 
   return (
-    <Layout style={{background: '#fff'}}>
+    <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }}>
       <Content style={{ margin: 30, }}>
         {items.length
           ?
@@ -36,14 +39,14 @@ const Cart = () => {
               )}
             </TransitionGroup>
             <Row justify='end' style={{marginTop: 30}}>
-              <Typography.Title>Общая сумма: {totalPrice} ₽</Typography.Title>
+              <Typography.Title style={context === 'dark' ? {color: 'rgba(255,255,255,0.85)'} : ''}>Общая сумма: {totalPrice} ₽</Typography.Title>
             </Row>
           </>
           :
           <EmptyCart />
         }
       </Content>
-    </Layout>
+    </div>
   )
 }
 
