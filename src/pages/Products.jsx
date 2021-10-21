@@ -28,6 +28,8 @@ const Products = () => {
 
   const searchedAndSortedCards = useSearch(products, selectedSort, value)
 
+  console.log(products);
+
   function sortCards(value) {
     setSelectedSort(value)
   }
@@ -52,6 +54,7 @@ const Products = () => {
         </Row>
         {!loading
           ?
+            // ""
           <ProductList cards={searchedAndSortedCards} />
           :
           <Loader />

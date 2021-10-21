@@ -5,11 +5,20 @@ import { useEffect } from 'react';
 import { productsActionCreators } from '../redux/reducers/products/actionCreators';
 import ProductCard from './ProductCard';
 import Loader from './Loader';
+import cartActionCreators from '../redux/reducers/cart/actionCreator';
+
 
 const ProductSlider = () => {
 
   const { fetchProducts } = useActions(productsActionCreators)
   const { products, loading } = useSelector(state => state.products)
+
+  const { addItem, getSum } = useActions(cartActionCreators)
+
+  function setItem(item) {
+    addItem(item)
+    getSum()
+  }
 
   useEffect(() => {
     if (!products.length) {
@@ -31,7 +40,7 @@ const ProductSlider = () => {
         >
           {products.map(item => 
             <SwiperSlide key={item.id}>
-              <ProductCard card={item} />
+              <ProductCard card={item} onClick={setItem} />
             </SwiperSlide>
           )}
           
