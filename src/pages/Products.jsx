@@ -1,6 +1,6 @@
 import { Layout, Row, Col, } from 'antd';
 import Search from '../components/Search'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductList from '../components/ProductList';
 import Filters from '../components/Filters';
 import { useSearch } from '../hooks/useSearch';
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { useActions } from '../hooks/useActions';
 import { productsActionCreators } from '../redux/reducers/products/actionCreators';
 import Loader from "../components/Loader";
-import { ThemeContext } from '../context/ThemeContext';
+import MyModal from '../components/MyModal';
 
 const { Content } = Layout;
 
@@ -16,10 +16,11 @@ const Products = () => {
 
   const [value, setValue] = useState('')
   const [selectedSort, setSelectedSort] = useState('')
+  const [isVisible, setVisible] = useState(false)
+
   const { products, loading } = useSelector(state => state.products)
   const { fetchProducts } = useActions(productsActionCreators)
-
-  const context = useContext(ThemeContext)
+  const {isAuth} = useSelector(state => state.login)
 
   useEffect(() => {
     fetchProducts()
@@ -28,10 +29,12 @@ const Products = () => {
 
   const searchedAndSortedCards = useSearch(products, selectedSort, value)
 
-  console.log(products);
-
   function sortCards(value) {
     setSelectedSort(value)
+  }
+
+  function onClick() {
+    setVisible(!isVisible)
   }
 
   return (
@@ -54,11 +57,12 @@ const Products = () => {
         </Row>
         {!loading
           ?
-            // ""
-          <ProductList cards={searchedAndSortedCards} />
+          <ProductList cards={searchedAndSortedCards} onClick={onClick} />
           :
           <Loader />
         }
+        {!isAuth &&
+          <MyModal isModalVisible={isVisible} onClick={onClick} />}
       </Content>
     </div>
   )

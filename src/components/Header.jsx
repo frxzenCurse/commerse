@@ -8,7 +8,7 @@ import { useActions } from '../hooks/useActions';
 import { AuthActionCreators } from '../redux/reducers/login/actionCreators';
 import ThemeChanger from './ThemeChanger';
 
-const Header = ({onClick, themeChange}) => {
+const Header = ({onClick, themeChange, theme}) => {
 
   const history = useHistory()
   const state = useSelector(state => state)
@@ -19,13 +19,13 @@ const Header = ({onClick, themeChange}) => {
     <Layout.Header style={{height: 65, transition: '.3s'}} className={context === 'light' ? 'header-light' : 'header-dark'}>
       <Row justify='space-between'>
         <Col>
-          <ThemeChanger onChange={e => themeChange(e.target.value)} />
+          <ThemeChanger onChange={e => themeChange(e.target.value)} theme={theme} />
         </Col>
         <Col>
           {state.login.isAuth
             ?
             <Menu disabledOverflow={true} theme={context === 'light' ? 'light' : 'dark'} mode="horizontal">
-              <Menu.Item key='1' onClick={() => history.push(POSTS)}>Посты</Menu.Item>
+              <Menu.Item key='posts' onClick={() => history.push(POSTS)}>Посты</Menu.Item>
               <Menu.Item key='2' onClick={() => history.push(PRODUCTS)}>Товары</Menu.Item>
               <Menu.Item key='3' style={{pointerEvents: 'none'}}>{state.login.user.username}</Menu.Item>
               <Menu.Item key='4' onClick={() => logout()}>Выйти</Menu.Item>

@@ -51,7 +51,7 @@ const PostForm = ({ isModalVisible, handleOk, closeModal }) => {
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit" type={context === 'light' ? 'light' : 'primary'}>
-            Submit
+            Создать пост
           </Button>
         </Form.Item>
       </Form>

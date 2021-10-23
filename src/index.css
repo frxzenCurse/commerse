@@ -44,6 +44,10 @@ code {
   background: #001529;
 }
 
+.dark .ant-empty-description {
+  color: rgba(255,255,255,0.85);
+}
+
 header.header-light {
   background: #FFF;
   border-bottom: 1px solid #f0f0f0;
@@ -146,5 +150,40 @@ header.header-dark {
   border-color: #042470;
 }
 .form-dark .ant-input-password-icon {
+  color: rgba(255,255,255,0.85);
+}
+
+.card {
+  width: 300px; 
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card .ant-card-body {
+  height: 100%;
+}
+
+.column {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.swiper-wrapper .swiper-slide {
+  height: auto;
+}
+
+.swiper-wrapper .react-reveal {
+  height: 100%;
+}
+
+.page404-dark .ant-result-title {
+  color: rgba(255,255,255,0.85);
+}
+.page404-dark .ant-result-subtitle {
   color: rgba(255,255,255,0.85);
 }

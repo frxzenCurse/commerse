@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 import { useActions } from '../hooks/useActions';
 import cartActionCreators from '../redux/reducers/cart/actionCreator';
 
-const ProductList = ({ cards }) => {
+const ProductList = ({ cards, onClick }) => {
 
   const { addItem, getSum } = useActions(cartActionCreators)
 
@@ -14,15 +14,17 @@ const ProductList = ({ cards }) => {
 
   return (
     <div className="container">
+      
       {cards.length
         ?
-        cards.map(card =>
-          <ProductCard
-            key={card.id}
-            card={card}
-            onClick={setItem}
-          />
-        )
+          cards.map(card =>
+            <ProductCard
+              key={card.id}
+              card={card}
+              onClick={setItem}
+              modalHandler={onClick}
+            />
+          )
         :
         <Typography.Title style={{ marginLeft: 10, }}>Таких товаров нет!</Typography.Title>
       }

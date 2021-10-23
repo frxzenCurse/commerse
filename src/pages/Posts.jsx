@@ -13,20 +13,19 @@ import { ThemeContext } from '../context/ThemeContext';
 
 const Posts = () => {
 
-  const [isVisible, setIsVisible] = useState(false)
+  const limit = 10
 
+  const [isVisible, setIsVisible] = useState(false)
   const [posts, setPosts] = useState([])
   const [value, setValue] = useState('')
   const [selectedSort, setSelectedSort] = useState('')
-  const searchedAndSortedPosts = useSearch(posts, selectedSort, value)
-
-  const limit = 10
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
   const [isMounted, setIsMounted] = useState(true) 
-
+  
   const context = useContext(ThemeContext)
-
+  
+  const searchedAndSortedPosts = useSearch(posts, selectedSort, value)
   const [fetchPosts, isLoading, error] = useFetching(async () => {
     const response = await PostService.getPosts(limit, page)
 

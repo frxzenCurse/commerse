@@ -2,8 +2,9 @@ import { Card, Button } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ThemeContext } from '../context/ThemeContext';
+import Fade from 'react-reveal/Fade';
 
-const ProductCard = ({ card, onClick }) => {
+const ProductCard = ({ card, onClick, modalHandler }) => {
 
   const [isAdd, setIsAdd] = useState(false)
   const { items } = useSelector(state => state.cart)
@@ -14,6 +15,8 @@ const ProductCard = ({ card, onClick }) => {
     if (isAuth) {
       onClick(card)
       setIsAdd(!isAdd)
+    } else {
+      modalHandler()
     }
   }
 
@@ -27,19 +30,27 @@ const ProductCard = ({ card, onClick }) => {
   }, [])
 
   return (
-    <div className={context === 'dark' ? 'card-dark' : ''} style={{ margin: 10 }}>
-      <Card title={card.title} style={{ width: 300, height: '100%'}}>
-        <p>{card.text}</p>
-        <p>{card.price} ₽</p>
-        <Button
-          type={context === 'light' ? 'light' : 'primary'}
-          onClick={setItem}
-          disabled={isAdd}
-        >
-          Добавить в корзину
-        </Button>
-      </Card>
-    </div>
+    <Fade bottom>
+      <div className={context === 'dark' ? 'card-dark' : ''} style={{ margin: 10 }}>
+        <Card className='card' title={card.title}>
+          <div className='column'>
+            <div className='column__item'>
+              <p>{card.text}</p>
+            </div>
+            <div className='column__item'>
+              <p>{card.price} ₽</p>
+              <Button
+                type={context === 'light' ? 'light' : 'primary'}
+                onClick={setItem}
+                disabled={isAdd}
+              >
+                Добавить в корзину
+              </Button>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </Fade>
   )
 }
 

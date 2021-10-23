@@ -16,7 +16,7 @@ function App() {
   const { addItem, getSum } = useActions(cartActionCreators)
   const { isAuth } = useSelector(state => state.login)
   const [isVisible, setIsVisible] = useState(false)
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState('')
 
   function onClick() {
     setIsVisible(!isVisible)
@@ -24,17 +24,18 @@ function App() {
 
   function themeChange(event) {
     setTheme(event)
-    if (event === 'dark') {
-      document.body.classList.add('dark')
-    } else {
-      document.body.classList.remove('dark')
-    }
   }
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
       setUser({ username: localStorage.getItem('username') })
       setAuth(true)
+    }
+
+    if (localStorage.getItem('theme')) {
+      setTheme(localStorage.getItem('theme'))
+    } else {
+      setTheme('light')
     }
 
     if (localStorage.getItem('cartItems')) {
@@ -48,11 +49,20 @@ function App() {
     // eslint-disable-next-line
   }, [])
 
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.body.classList.add('dark')
+    } else {
+      document.body.classList.remove('dark')
+    }
+
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   return (
     <ThemeContext.Provider value={theme}>
       <BrowserRouter>
-        <Header onClick={onClick} themeChange={themeChange} />
+        <Header onClick={onClick} themeChange={themeChange} theme={theme} />
             <AppRouter />
         {!isAuth &&
           <MyModal isModalVisible={isVisible} onClick={onClick} />}
