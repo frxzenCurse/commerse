@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard"
-import { Typography } from 'antd';
 import { useActions } from '../hooks/useActions';
+import { Empty } from 'antd';
 import cartActionCreators from '../redux/reducers/cart/actionCreator';
 
 const ProductList = ({ cards, onClick }) => {
@@ -26,7 +26,9 @@ const ProductList = ({ cards, onClick }) => {
             />
           )
         :
-        <Typography.Title style={{ marginLeft: 10, }}>Таких товаров нет!</Typography.Title>
+        <div className='empty-container'>
+          <Empty />
+        </div>
       }
     </div>
   )

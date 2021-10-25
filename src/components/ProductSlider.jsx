@@ -36,7 +36,7 @@ const ProductSlider = () => {
         <Swiper
           style={{marginTop: 30}}
           spaceBetween={40}
-          slidesPerView={3}
+          slidesPerView={4}
         >
           {products.map(item => 
             <SwiperSlide key={item.id}>
