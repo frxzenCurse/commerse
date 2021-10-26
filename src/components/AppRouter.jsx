@@ -5,8 +5,8 @@ import { ROUTES } from '../routes';
 const AppRouter = () => {
   return (
     <Switch>
-      {ROUTES.map(({ path, component }) =>
-        <Route key={path} path={path} component={component} exact />
+      {ROUTES.map(({ path, component, render }) =>
+        <Route key={path} path={path} component={component} exact render={render} />
       )}
       <Redirect to={PAGE404} />
     </Switch>
