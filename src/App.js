@@ -12,7 +12,7 @@ import {ThemeContext} from './context/ThemeContext';
 
 function App() {
 
-  const { setUser, setAuth } = useActions(AuthActionCreators)
+  const { setUsername, setAuth } = useActions(AuthActionCreators)
   const { addItem, getSum } = useActions(cartActionCreators)
   const { isAuth } = useSelector(state => state.login)
   const [isVisible, setIsVisible] = useState(false)
@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
-      setUser({ username: localStorage.getItem('username') })
+      setUsername(localStorage.getItem('username'))
       setAuth(true)
     }
 

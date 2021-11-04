@@ -27,7 +27,7 @@ const Header = ({onClick, themeChange, theme}) => {
             <Menu disabledOverflow={true} theme={context === 'light' ? 'light' : 'dark'} mode="horizontal">
               <Menu.Item key='posts' onClick={() => history.push(POSTS)}>Посты</Menu.Item>
               <Menu.Item key='2' onClick={() => history.push(PRODUCTS)}>Товары</Menu.Item>
-              <Menu.Item key='3' style={{pointerEvents: 'none'}}>{state.login.user.username}</Menu.Item>
+              <Menu.Item key='3' style={{pointerEvents: 'none'}}>{state.login.username}</Menu.Item>
               <Menu.Item key='4' onClick={() => logout()}>Выйти</Menu.Item>
               <Menu.Item key='5' onClick={() => history.push(CART)}>{state.cart.items.length} Корзина</Menu.Item>
             </Menu>

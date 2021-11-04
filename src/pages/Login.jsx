@@ -7,6 +7,12 @@ import { PRODUCTS } from '../data/pages';
 import { useActions } from '../hooks/useActions';
 import { AuthActionCreators } from '../redux/reducers/login/actionCreators';
 
+
+const formItemLayout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
 const Login = () => {
 
   const [username, setUsername] = useState('')
@@ -39,9 +45,10 @@ const Login = () => {
             <div style={{ color: 'red', marginBottom: 10, }}>{error}</div>
           }
           <Form.Item
-            label="Username"
-            name="username"
+            label="Email"
+            name="email"
             rules={[{ required: true, message: 'Please input your username!' }]}
+            {...formItemLayout}
           >
             <Input value={username} onChange={e => setUsername(e.target.value)} />
           </Form.Item>
@@ -49,12 +56,13 @@ const Login = () => {
             label="Password"
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
+            {...formItemLayout}
           >
             <Input.Password value={password} onChange={e => setPassword(e.target.value)} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button 
-              htmlType="submit" 
+            <Button
+              htmlType="submit"
               loading={isLoading}
               type={context === 'light' ? 'light' : 'primary'}
             >

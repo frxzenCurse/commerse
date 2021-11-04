@@ -22,14 +22,17 @@ code {
 .item-enter {
   max-height: 0;
 }
+
 .item-enter-active {
   max-height: 200px;
   transition: 500ms ease-in;
 }
+
 .item-exit {
   overflow: hidden;
   max-height: 200px;
 }
+
 .item-exit-active {
   max-height: 0;
   transition: 500ms ease-in;
@@ -45,13 +48,14 @@ code {
 }
 
 .dark .ant-empty-description {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 header.header-light {
   background: #FFF;
   border-bottom: 1px solid #f0f0f0;
 }
+
 header.header-dark {
   position: relative;
   z-index: 1000;
@@ -59,48 +63,56 @@ header.header-dark {
 }
 
 .card-dark .ant-card {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   background: #001529;
   border-color: #042470;
 }
+
 .card-dark .ant-card .ant-card-head {
   background: #001529;
   border-color: #042470;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .card-dark .ant-card-meta-title {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .card-dark .ant-card-meta-description {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .input-dark input {
   background: #001529;
   border-color: #042470;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .select-dark .ant-select {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .select-dark .ant-select .ant-select-selector {
   background-color: #001529 !important;
   border-color: #042470 !important;
 }
+
 .select-dark .ant-select .ant-select-selection-placeholder {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .select-dark .ant-select .ant-select-arrow {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .list-dark .ant-list-item-meta-description {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .list-dark .ant-list-item-meta-title {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .list-dark .ant-list-split .ant-list-item {
   border-color: #042470;
 }
@@ -109,52 +121,78 @@ header.header-dark {
   background: #001529;
   border-color: #042470;
 }
+
 .modal-dark .ant-modal-title {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .modal-dark .ant-modal-close {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .modal-dark .ant-modal-close:hover {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .modal-dark .ant-modal-content {
   background-color: #001529;
 }
+
 .modal-dark .ant-form-item-required {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .modal-dark .ant-modal-body {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .modal-dark .ant-modal-footer {
   border-color: #042470;
 }
 
 .empty-dark .ant-result-title {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .form-dark .ant-form-item-required {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .form-dark .ant-input {
   background-color: #001529;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
-.form-dark .ant-input#username {
+
+.form-dark .ant-input#email, 
+.form-dark .ant-input#password {
   border-color: #042470;
 }
+
+.form-dark .ant-form-item-has-error .ant-input#email,
+.form-dark .ant-form-item-has-error .ant-input#password {
+  background-color: #001529;
+  border-color: #ff4d4f;
+}
+
 .form-dark .ant-input-affix-wrapper {
   background-color: #001529;
   border-color: #042470;
 }
+
+.form-dark .ant-form-item-has-error .ant-input-affix-wrapper {
+  background-color: #001529 !important;
+}
+
 .form-dark .ant-input-password-icon {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.form-dark .ant-input-password-icon:hover {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .card {
-  width: 300px; 
+  width: 300px;
   height: 100%;
 
   display: flex;
@@ -182,12 +220,18 @@ header.header-dark {
 }
 
 .page404-dark .ant-result-title {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
+
 .page404-dark .ant-result-subtitle {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .empty-container {
   margin: 50px auto 0;
 }
+
+/* .dark .ant-select-dropdown {
+  background-color: #001529;
+  color: rgba(255, 255, 255, 0.85);
+} */
