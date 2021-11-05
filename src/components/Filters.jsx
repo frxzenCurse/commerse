@@ -1,20 +1,9 @@
-import { Select } from 'antd';
-import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import FilterItem from "./FilterItem"
 
-const { Option } = Select;
-
-const Filters = ({ placeholder, options, onChange }) => {
-
-  const context = useContext(ThemeContext)
-
+const Filters = () => {
   return (
-    <div className={context === 'dark' ? 'select-dark' : ''}>
-      <Select placeholder={placeholder} style={{ width: 220 }} onChange={onChange} >
-        {options.map(option =>
-          <Option key={option.value} value={option.value}>{option.name}</Option>
-        )}
-      </Select>
+    <div>
+      <FilterItem />
     </div>
   )
 }

@@ -31,7 +31,7 @@ const ProductCard = ({ card, onClick, modalHandler }) => {
 
   return (
     <Fade bottom>
-      <div className={context === 'dark' ? 'card-dark' : ''} style={{ margin: 10 }}>
+      <div className={context === 'dark' ? 'card-dark' : ''}>
         <Card className='card' title={card.title}>
           <div className='column'>
             <div className='column__item'>

@@ -1,5 +1,5 @@
 import PostList from '../components/PostList';
-import Filters from '../components/Filters';
+import Sort from '../components/Sort';
 import Search from '../components/Search';
 import { useContext, useState } from 'react';
 import { useEffect } from 'react';
@@ -67,7 +67,7 @@ const Posts = () => {
     <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }}>
       <Row>
         <Col span={6}>
-          <Filters
+          <Sort
             placeholder='Сортировка'
             options={[
               { value: 'title', name: 'По названию' },
