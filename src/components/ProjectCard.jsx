@@ -1,9 +1,14 @@
+import { useHistory } from "react-router"
+import { PRODUCT } from "../data/pages"
 
 const ProjectCard = ({ project }) => {
+
+  const history = useHistory()
+
   return (
-    <div className='project-card'>
+    <div className='project-card' onClick={() => history.push(PRODUCT + project.code)}>
       <div className='project-card__container'>
-        {project.images.length 
+        {project.images.length
           ?
           <img className='project-card__img' src={'https://api.d4u.dev.dterra.eu/public' + project.imgMain.img} alt="" />
           :

@@ -1,0 +1,26 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgray;
+}
+
+.item:not(:first-child) {
+  margin-top: 15px;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.label {
+  color: gray;
+}
+
+.button {
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,7 +1,6 @@
 import { Layout, Row, Col, } from 'antd';
 import Search from '../components/Search'
 import { useEffect, useState } from 'react'
-import ProductList from '../components/ProductList';
 import Sort from '../components/Sort';
 import { useSearch } from '../hooks/useSearch';
 import { useSelector } from 'react-redux';
@@ -9,8 +8,6 @@ import { useActions } from '../hooks/useActions';
 import { productsActionCreators } from '../redux/reducers/products/actionCreators';
 import Loader from "../components/Loader";
 import MyModal from '../components/MyModal';
-import { useFetching } from '../hooks/useFetching';
-import { Projects } from '../API/PostService';
 import ProjectList from '../components/ProjectList';
 
 const { Content } = Layout;
@@ -20,25 +17,15 @@ const Products = () => {
   const [value, setValue] = useState('')
   const [selectedSort, setSelectedSort] = useState('')
   const [isVisible, setVisible] = useState(false)
-  const [projects, setProjects] = useState([])
 
-  const { products, loading } = useSelector(state => state.products)
-  // const { fetchProducts } = useActions(productsActionCreators)
-  const { isAuth } = useSelector(state => state.login)
-  const [fetchProjects, isLoading, error] = useFetching(async () => {
-    const response = await Projects.getProjects()
-
-    console.log(response);
-    setProjects(response.data.data.data)
-  })
+  const { products, isLoading, error } = useSelector(state => state.products)
+  const { fetchProducts } = useActions(productsActionCreators)
+  // const { isAuth } = useSelector(state => state.login)
 
   useEffect(() => {
-    // fetchProducts()
+    fetchProducts()
     // eslint-disable-next-line
-    fetchProjects()
   }, [])
-
-  console.log(isLoading);
 
   const searchedAndSortedCards = useSearch(products, selectedSort, value)
 
@@ -51,7 +38,7 @@ const Products = () => {
   }
 
   return (
-    <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }}>
+    <div className='container'>
       <Content>
         <Row justify='space-between'>
           <Col span={4}>
@@ -72,25 +59,19 @@ const Products = () => {
           <Col span={6}>
           </Col>
           <Col span={18}>
+            {error && <h1 style={{ color: 'red' }}>{error}</h1>}
             {isLoading
               ?
               <Loader />
               :
-              <ProjectList projects={projects} />
+              <ProjectList projects={products} />
             }
           </Col>
         </Row>
-        {!isAuth && <MyModal isModalVisible={isVisible} onClick={onClick} />}
+        {/* {!isAuth && <MyModal isModalVisible={isVisible} onClick={onClick} />} */}
       </Content>
     </div>
   )
 }
 
 export default Products
-
-// {!loading
-//   ?
-//   <ProductList cards={searchedAndSortedCards} onClick={onClick} />
-//   :
-//   <Loader />
-// }

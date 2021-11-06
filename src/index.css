@@ -19,10 +19,9 @@ img {
 }
 
 .container {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  row-gap: 20px;
-  column-gap: 20px;
+  padding: 30px 60px;
+  overflow: hidden;
+  transition: .3s;
 }
 
 .item-enter {
@@ -258,6 +257,7 @@ header.header-dark {
   width: 100%;
 
   border-bottom: 1px solid #d0d1d1;
+  cursor: pointer;
 }
 
 .project-card:hover .project-card__img {
@@ -318,4 +318,25 @@ header.header-dark {
   color: #7d8281;
   font-size: 14px;
   font-weight: 600;
+}
+
+.single-project__title {
+  margin: 20px 0 40px;
+
+  font-size: 35px;
+}
+
+.single-project__label {
+  margin-top: 20px;
+
+  font-size: 20px;
+  color: gray;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.single-project__description {
+  margin-top: 20px;
+
+  font-size: 16px;
 }
