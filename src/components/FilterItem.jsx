@@ -1,10 +1,15 @@
+import { useState } from "react"
 
+const FilterItem = ({filter, values, multiple}) => {
 
-const FilterItem = () => {
+  const [isActive, setIsActive] = useState(false) 
+
   return (
-    <div>
-
-    </div>
+    <>
+      {values[filter].map(item => 
+        <div className={isActive ? 'active' : null} key={item.id}>{item.title}</div>
+      )}
+    </>
   )
 }
 

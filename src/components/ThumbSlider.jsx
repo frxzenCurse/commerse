@@ -1,34 +1,27 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import cl from '../styles/ThumbSlider.module.css'
-import { Controller, Navigation } from 'swiper';
+import SwiperCore, { Thumbs } from 'swiper';
 
-const ThumbSlider = ({project}) => {
+SwiperCore.use([Thumbs])
 
-  const [swiper, setSwiper] = useState(null)
+const ThumbSlider = ({ project }) => {
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   let params = {
-    modules: [Controller, Navigation],
-    // pagination: {
-    //   el: ".swiper-pagination",
-    //   type: "bullets",
-    //   clickable: true
-    // },
+    modules: [Thumbs],
     slidesPerView: 1,
-    // getSwiper: setSwiper,
-    controller: {
-      control: thumbsSwiper
+    thumbs: {
+      swiper: thumbsSwiper
     }
   }
 
   let thumbsParams = {
-    modules: [Controller],
-    // slideToClickedSlide: true,
+    slideToClickedSlide: true,
     spaceBetween: 10,
     slidesPerView: 5,
-    // getSwiper: setThumbsSwiper,
-    onSwiper: setThumbsSwiper,
+    onSwiper: (thumbs) => { setThumbsSwiper(thumbs) },
   }
 
   return (
@@ -42,7 +35,7 @@ const ThumbSlider = ({project}) => {
       </Swiper>
       <Swiper {...thumbsParams} className={cl.thumbs}>
         {project.images.map((item, index) =>
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className='thumb-slide'>
             <img className={cl.img} src={'https://api.d4u.dev.dterra.eu/public' + item.img} alt="" />
           </SwiperSlide>
         )}

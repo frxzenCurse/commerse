@@ -9,6 +9,7 @@ import { productsActionCreators } from '../redux/reducers/products/actionCreator
 import Loader from "../components/Loader";
 import MyModal from '../components/MyModal';
 import ProjectList from '../components/ProjectList';
+import Filters from '../components/Filters';
 
 const { Content } = Layout;
 
@@ -55,8 +56,9 @@ const Products = () => {
             <Search value={value} onChange={(e) => setValue(e.target.value)} />
           </Col>
         </Row>
-        <Row>
-          <Col span={6}>
+        <Row justify='space-between'>
+          <Col span={4}>
+            <Filters />
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}

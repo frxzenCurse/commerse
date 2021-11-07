@@ -31,7 +31,7 @@ const ProjectDetail = () => {
         ?
         <Loader />
         :
-        <SingleProjectCard project={project} />
+        <SingleProjectCard project={project} data={products} />
       }
     </div>
   )

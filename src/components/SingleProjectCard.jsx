@@ -1,9 +1,11 @@
 import { Empty, Col, Row } from 'antd';
+import ProductSlider from './ProductSlider';
 import ProjectInfo from './ProjectInfo';
 import ThumbSlider from './ThumbSlider';
 
-const SingleProjectCard = ({project}) => {
+const SingleProjectCard = ({project, data}) => {
 
+  console.log(data);
 
   return (
     <div className='single-project'>
@@ -25,6 +27,7 @@ const SingleProjectCard = ({project}) => {
           <div className='single-project__description'>
             {project.description}
           </div>
+          <ProductSlider data={data} />
         </>
         :
         <Empty />

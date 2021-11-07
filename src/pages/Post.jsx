@@ -55,7 +55,7 @@ const Post = () => {
       >
         Вернуться назад
       </Button>
-      <ProductSlider />
+      {/* <ProductSlider /> */}
     </div>
   )
 }
