@@ -1,13 +1,17 @@
 import { Checkbox } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
-const MyCheckbox = ({ children, ...props }) => {
+const MyCheckbox = ({ value, filter, onChange }) => {
 
   const [isChecked, setIsChecked] = useState(false)
 
+  useEffect(() => {
+    onChange(isChecked, value, filter.id)
+  }, [isChecked])
+
   return (
-    <Checkbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} {...props}>{children}</Checkbox>
+    <Checkbox checked={isChecked} onChange={() => setIsChecked(!isChecked)}>{filter.title}</Checkbox>
   )
 }
 

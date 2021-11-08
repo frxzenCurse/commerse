@@ -33,9 +33,9 @@ const Products = () => {
   const { fetchProducts } = useActions(productsActionCreators)
 
   useEffect(() => {
-    fetchProducts()
+    fetchProducts(params)
     // eslint-disable-next-line
-  }, [])
+  }, [params])
 
   const searchedAndSortedCards = useSearch(products, selectedSort, value)
 
@@ -43,9 +43,26 @@ const Products = () => {
     setSelectedSort(value)
   }
 
+  function updateParams(boolean, item, value) {
+    if (boolean) {
+      setParams({ ...params, [item]: [...params[item], value] });
+    } else {
+      setParams({
+        ...params,
+        [item]: [...params[item]].filter((item) => item !== value),
+      });
+    }
+  }
+
+  function updateSingleParams(value, item) {
+    setParams({ ...params, [item]: [value] })
+  }
+
   // function onClick() {
   //   setVisible(!isVisible)
   // }
+
+  console.log(params);
 
   return (
     <div className='container'>
@@ -67,7 +84,7 @@ const Products = () => {
         </Row>
         <Row justify='space-between'>
           <Col span={4}>
-            <Filters />
+            <Filters onChange={updateParams} singleChange={updateSingleParams} />
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}

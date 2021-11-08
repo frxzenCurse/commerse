@@ -5,11 +5,11 @@ export const productsActionCreators = {
   setLoading: (boolean) => ({ type: PRODUCTS_LOADING, payload: boolean }),
   setError: (payload) => ({ type: PRODUCTS_ERROR, payload: payload }),
   setProducts: (payload) => ({ type: SET_PRODUCTS, payload: payload }),
-  fetchProducts: () => async (dispatch) => {
+  fetchProducts: (params) => async (dispatch) => {
     dispatch(productsActionCreators.setLoading(true))
     try {
 
-      const response = await Projects.getProjects()
+      const response = await Projects.getProjects(params)
       console.log(response);
       dispatch(productsActionCreators.setProducts(response.data.data.data))
     } catch (e) {

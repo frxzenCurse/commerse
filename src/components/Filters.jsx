@@ -7,7 +7,7 @@ import FilterList from "./FilterList";
 
 const { Panel } = Collapse;
 
-const Filters = () => {
+const Filters = ({onChange, singleChange}) => {
 
   const [data, setData] = useState(null)
 
@@ -35,7 +35,13 @@ const Filters = () => {
         <Collapse>
           {data.options.map(item =>
             <Panel header={item.name} key={item.filter}>
-              <FilterList multiple={item.multiple} filter={item.filter} values={data.values} />
+              <FilterList 
+                onChange={onChange} 
+                multiple={item.multiple} 
+                filter={item.filter} 
+                values={data.values} 
+                singleChange={singleChange}
+              />
             </Panel>
           )}
         </Collapse>
