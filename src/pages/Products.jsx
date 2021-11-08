@@ -58,7 +58,8 @@ const Products = () => {
         </Row>
         <Row justify='space-between'>
           <Col span={4}>
-            <Filters />
+            {/* <Filters /> */}
+            asd
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}
