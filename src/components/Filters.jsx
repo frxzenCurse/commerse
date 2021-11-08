@@ -1,9 +1,9 @@
-import FilterItem from "./FilterItem"
 import { Collapse } from 'antd';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useFetching } from '../hooks/useFetching';
 import Loader from "./Loader";
+import FilterList from "./FilterList";
 
 const { Panel } = Collapse;
 
@@ -35,7 +35,7 @@ const Filters = () => {
         <Collapse>
           {data.options.map(item =>
             <Panel header={item.name} key={item.filter}>
-              <FilterItem filter={item.filter} values={data.values} multiple={item.multiple} />
+              <FilterList multiple={item.multiple} filter={item.filter} values={data.values} />
             </Panel>
           )}
         </Collapse>

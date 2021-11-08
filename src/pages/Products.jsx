@@ -18,10 +18,19 @@ const Products = () => {
   const [value, setValue] = useState('')
   const [selectedSort, setSelectedSort] = useState('')
   const [isVisible, setVisible] = useState(false)
+  const [page, setPage] = useState(1)
+  const [params, setParams] = useState({
+    buildingTypeId: [],
+    objectTypeId: [],
+    page: page,
+    priceSegmentId: [],
+    roomId: [],
+    square: [],
+    view: "",
+  })
 
   const { products, isLoading, error } = useSelector(state => state.products)
   const { fetchProducts } = useActions(productsActionCreators)
-  // const { isAuth } = useSelector(state => state.login)
 
   useEffect(() => {
     fetchProducts()
@@ -34,9 +43,9 @@ const Products = () => {
     setSelectedSort(value)
   }
 
-  function onClick() {
-    setVisible(!isVisible)
-  }
+  // function onClick() {
+  //   setVisible(!isVisible)
+  // }
 
   return (
     <div className='container'>
@@ -58,8 +67,7 @@ const Products = () => {
         </Row>
         <Row justify='space-between'>
           <Col span={4}>
-            {/* <Filters /> */}
-            asd
+            <Filters />
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}

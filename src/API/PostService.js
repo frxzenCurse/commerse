@@ -24,16 +24,18 @@ export const PostService = {
   },
 }
 
+const initialParams = {
+  buildingTypeId: [],
+  objectTypeId: [],
+  page: 1,
+  priceSegmentId: [],
+  roomId: [],
+  square: [],
+  view: "",
+}
+
 export const Projects = {
-  getProjects: () => {
-    return axios.post('https://api.d4u.dev.dterra.eu/api/project/list', {
-      buildingTypeId: [],
-      objectTypeId: [],
-      page: 1,
-      priceSegmentId: [],
-      roomId: [],
-      square: [],
-      view: "",
-    })
+  getProjects: (body = initialParams) => {
+    return axios.post('https://api.d4u.dev.dterra.eu/api/project/list', {...body})
   }
 }
