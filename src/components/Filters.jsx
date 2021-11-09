@@ -34,7 +34,7 @@ const Filters = ({onChange, singleChange}) => {
         :
         <Collapse>
           {data.options.map(item =>
-            <Panel header={item.name} key={item.filter}>
+            <Panel header={item.name} key={item.filter} forceRender={true}>
               <FilterList 
                 onChange={onChange} 
                 multiple={item.multiple} 

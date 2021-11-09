@@ -27,7 +27,7 @@ export const PostService = {
 const initialParams = {
   buildingTypeId: [],
   objectTypeId: [],
-  page: 1,
+  // page: 1,
   priceSegmentId: [],
   roomId: [],
   square: [],

@@ -6,9 +6,12 @@ const ProjectList = ({ projects }) => {
     <div className='project-list'>
       {projects.length
         ?
-        projects.map(project =>
-          <ProjectCard key={project.id} project={project} />
-        )
+        <>
+          {projects.map(project =>
+            <ProjectCard key={project.id} project={project} />
+          )}
+          
+        </>
         :
         <div className='empty-container'>
           <Empty />

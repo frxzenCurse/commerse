@@ -354,3 +354,10 @@ header.header-dark {
   position: sticky;
   top: 60px;
 }
+
+.button-show {
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: center;
+}

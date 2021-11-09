@@ -1,8 +1,5 @@
-import { Layout, Row, Col, } from 'antd';
-import Search from '../components/Search'
+import { Layout, Row, Col, Button } from 'antd';
 import { useEffect, useState } from 'react'
-import Sort from '../components/Sort';
-import { useSearch } from '../hooks/useSearch';
 import { useSelector } from 'react-redux';
 import { useActions } from '../hooks/useActions';
 import { productsActionCreators } from '../redux/reducers/products/actionCreators';
@@ -15,33 +12,29 @@ const { Content } = Layout;
 
 const Products = () => {
 
-  const [value, setValue] = useState('')
-  const [selectedSort, setSelectedSort] = useState('')
-  const [isVisible, setVisible] = useState(false)
   const [page, setPage] = useState(1)
   const [params, setParams] = useState({
     buildingTypeId: [],
     objectTypeId: [],
-    page: page,
     priceSegmentId: [],
     roomId: [],
     square: [],
     view: "",
   })
 
-  const { products, isLoading, error } = useSelector(state => state.products)
-  const { fetchProducts } = useActions(productsActionCreators)
+  const { products, isLoading, error, total } = useSelector(state => state.products)
+  const { fetchProducts, loadMoreProducts } = useActions(productsActionCreators)
 
   useEffect(() => {
     fetchProducts(params)
     // eslint-disable-next-line
   }, [params])
 
-  const searchedAndSortedCards = useSearch(products, selectedSort, value)
-
-  function sortCards(value) {
-    setSelectedSort(value)
-  }
+  useEffect(() => {
+    if (page > 1) {
+      loadMoreProducts({ ...params, page: page })
+    }
+  }, [page])
 
   function updateParams(boolean, item, value) {
     if (boolean) {
@@ -58,30 +51,9 @@ const Products = () => {
     setParams({ ...params, [item]: [value] })
   }
 
-  // function onClick() {
-  //   setVisible(!isVisible)
-  // }
-
-  console.log(params);
-
   return (
     <div className='container'>
       <Content>
-        <Row justify='space-between'>
-          <Col span={4}>
-            <Sort
-              placeholder='Сортировка'
-              options={[
-                { value: 'title', name: 'По названию' },
-                { value: 'text', name: 'По описанию' },
-              ]}
-              onChange={sortCards}
-            />
-          </Col>
-          <Col span={18}>
-            <Search value={value} onChange={(e) => setValue(e.target.value)} />
-          </Col>
-        </Row>
         <Row justify='space-between'>
           <Col span={4}>
             <Filters onChange={updateParams} singleChange={updateSingleParams} />
@@ -92,7 +64,17 @@ const Products = () => {
               ?
               <Loader />
               :
-              <ProjectList projects={products} />
+              <>
+                <ProjectList projects={products} />
+                {total > 12 && total > products.length
+                  ?
+                  <div className='button-show'>
+                    <Button onClick={() => setPage(page + 1)}>Показать еще</Button>
+                  </div>
+                  :
+                  null
+                }
+              </>
             }
           </Col>
         </Row>
