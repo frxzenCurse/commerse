@@ -2,16 +2,38 @@ import { Button } from 'antd'
 import { useEffect, useState } from 'react'
 import cl from '../styles/ProjectInfo.module.css'
 import DesignerInfo from './DesignerInfo'
+import cartActionCreators from '../redux/reducers/cart/actionCreator'
+import { useActions } from '../hooks/useActions'
+import { useSelector } from 'react-redux'
 
-const ProjectInfo = ({ project }) => {
+const ProjectInfo = ({ project, onClick }) => {
 
   const [rooms, setRooms] = useState([])
+  const [isAdded, setIsAdded] = useState(false)
+
+  const { login, cart } = useSelector(state => state)
+  const { addItem } = useActions(cartActionCreators)
 
   useEffect(() => {
     project.rooms.forEach(item => {
       setRooms([...rooms, item.room.title])
     })
+
+    const item = cart.items.find(item => item.id === project.id)
+
+    if (item) {
+      setIsAdded(true)
+    }
   }, [])
+
+  function addWishItem() {
+    if (!login.isAuth) {
+      onClick()
+    } else {
+      setIsAdded(!isAdded)
+      addItem(project)
+    }
+  }
 
   return (
     <div>
@@ -32,7 +54,7 @@ const ProjectInfo = ({ project }) => {
         <div className={cl.label}>{project.price_segment.title}</div>
       </div>
       <div className={cl.button}>
-        <Button>
+        <Button onClick={addWishItem} disabled={isAdded}>
           Добавить в избранное
         </Button>
       </div>

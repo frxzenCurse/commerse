@@ -1,16 +1,7 @@
-import {  ADD_CART_ITEM, GET_TOTAL_SUM, REMOVE_CART_ITEM } from "./actions"
+import {  ADD_CART_ITEM, REMOVE_CART_ITEM } from "./actions"
 
 const initialState = {
   items: [],
-  totalPrice: 0,
-}
-
-const getTotalSum = (arr) => {
-  let sum = 0
-  for (let i = 0; i < arr.length; i++) {
-    sum += arr[i].price
-  }
-  return sum
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -19,10 +10,8 @@ const cartReducer = (state = initialState, action) => {
       const arr = [...state.items, action.payload]
       localStorage.setItem('cartItems', JSON.stringify(arr))
 
-      return {...state, items: [...state.items, action.payload]}
+      return {...state, items: arr}
     }
-    case GET_TOTAL_SUM: 
-      return {...state, totalPrice: getTotalSum(state.items)}
     case REMOVE_CART_ITEM: {
       const arr = [...state.items].filter(item => item.id !== action.payload)
       localStorage.setItem('cartItems', JSON.stringify(arr))

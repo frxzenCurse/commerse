@@ -78,7 +78,7 @@ const Products = () => {
             }
           </Col>
         </Row>
-        {/* {!isAuth && <MyModal isModalVisible={isVisible} onClick={onClick} />} */}
+        
       </Content>
     </div>
   )

@@ -3,9 +3,7 @@ import ProductSlider from './ProductSlider';
 import ProjectInfo from './ProjectInfo';
 import ThumbSlider from './ThumbSlider';
 
-const SingleProjectCard = ({project, data}) => {
-
-  console.log(data);
+const SingleProjectCard = ({project, data, onClick}) => {
 
   return (
     <div className='single-project'>
@@ -21,7 +19,7 @@ const SingleProjectCard = ({project, data}) => {
               <ThumbSlider project={project} />
             </Col>
             <Col span={8}>
-              <ProjectInfo project={project} />
+              <ProjectInfo project={project} onClick={onClick} />
             </Col>
           </Row>
           <div className='single-project__description'>

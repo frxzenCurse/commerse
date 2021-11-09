@@ -44,7 +44,6 @@ function App() {
       array.forEach(item => {
         addItem(item)
       })
-      getSum()
     }
     // eslint-disable-next-line
   }, [])
