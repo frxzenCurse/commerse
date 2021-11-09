@@ -14,7 +14,7 @@ const EmptyCart = () => {
     <div className={context === 'dark' ? 'empty-dark' : ''}>
       <Result
         icon={<FrownOutlined />}
-        title="В вашей корзине пока пусто"
+        title="Ваш список избранного пуст"
         extra={<Button type={context === 'dark' ? 'primary' : 'light'} onClick={() => history.push(PRODUCTS)}>Выбрать товар</Button>}
       />
     </div>

@@ -26,20 +26,27 @@ const ThumbSlider = ({ project }) => {
 
   return (
     <div>
-      <Swiper {...params}>
-        {project.images.map((item, index) =>
-          <SwiperSlide key={index}>
-            <img className={cl.img} src={'https://api.d4u.dev.dterra.eu/public' + item.img} alt="" />
-          </SwiperSlide>
-        )}
-      </Swiper>
-      <Swiper {...thumbsParams} className={cl.thumbs}>
-        {project.images.map((item, index) =>
-          <SwiperSlide key={index} className='thumb-slide'>
-            <img className={cl.img} src={'https://api.d4u.dev.dterra.eu/public' + item.img} alt="" />
-          </SwiperSlide>
-        )}
-      </Swiper>
+      {project.images.length > 1
+        ?
+        <>
+          <Swiper {...params}>
+            {project.images.map((item, index) =>
+              <SwiperSlide key={index}>
+                <img className={cl.img} src={'https://api.d4u.dev.dterra.eu/public' + item.img} alt="" />
+              </SwiperSlide>
+            )}
+          </Swiper>
+          <Swiper {...thumbsParams} className={cl.thumbs}>
+            {project.images.map((item, index) =>
+              <SwiperSlide key={index} className='thumb-slide'>
+                <img className={cl.img} src={'https://api.d4u.dev.dterra.eu/public' + item.img} alt="" />
+              </SwiperSlide>
+            )}
+          </Swiper>
+        </>
+        :
+        <img src={'https://api.d4u.dev.dterra.eu/public' + project.images[0].img} alt="" />
+      }
     </div>
   )
 }

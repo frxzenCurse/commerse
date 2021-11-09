@@ -16,7 +16,12 @@ const SingleProjectCard = ({project, data, onClick}) => {
           </h1>
           <Row justify='space-between'>
             <Col span={12}>
-              <ThumbSlider project={project} />
+              {project.images.length
+                ?
+                <ThumbSlider project={project} />
+                :
+                <img src="https://via.placeholder.com/1000/771796" alt="" />
+              }
             </Col>
             <Col span={8}>
               <ProjectInfo project={project} onClick={onClick} />

@@ -12,7 +12,7 @@ const ProjectInfo = ({ project, onClick }) => {
   const [isAdded, setIsAdded] = useState(false)
 
   const { login, cart } = useSelector(state => state)
-  const { addItem } = useActions(cartActionCreators)
+  const { addItem, removeItem } = useActions(cartActionCreators)
 
   useEffect(() => {
     project.rooms.forEach(item => {
@@ -26,14 +26,13 @@ const ProjectInfo = ({ project, onClick }) => {
     }
   }, [])
 
-  function addWishItem() {
-    if (!login.isAuth) {
-      onClick()
-    } else {
-      setIsAdded(!isAdded)
+  useEffect(() => {
+    if (isAdded) {
       addItem(project)
+    } else {
+      removeItem(project.id)
     }
-  }
+  }, [isAdded])
 
   return (
     <div>
@@ -54,8 +53,8 @@ const ProjectInfo = ({ project, onClick }) => {
         <div className={cl.label}>{project.price_segment.title}</div>
       </div>
       <div className={cl.button}>
-        <Button onClick={addWishItem} disabled={isAdded}>
-          Добавить в избранное
+        <Button onClick={() => login.isAuth ? setIsAdded(!isAdded) : onClick()}>
+          {isAdded ? 'Удалить из избранного' : 'Добавить в избранное'}
         </Button>
       </div>
       <DesignerInfo info={project.designer} />

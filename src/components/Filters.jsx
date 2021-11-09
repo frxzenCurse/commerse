@@ -33,17 +33,22 @@ const Filters = ({onChange, singleChange}) => {
         <Loader />
         :
         <Collapse>
-          {data.options.map(item =>
-            <Panel header={item.name} key={item.filter} forceRender={true}>
-              <FilterList 
-                onChange={onChange} 
-                multiple={item.multiple} 
-                filter={item.filter} 
-                values={data.values} 
-                singleChange={singleChange}
-              />
-            </Panel>
-          )}
+          {data
+            ?
+            data.options.map(item =>
+              <Panel header={item.name} key={item.filter} forceRender={true}>
+                <FilterList 
+                  onChange={onChange} 
+                  multiple={item.multiple} 
+                  filter={item.filter} 
+                  values={data.values} 
+                  singleChange={singleChange}
+                />
+              </Panel>
+            )
+            :
+            null
+          }
         </Collapse>
       }
     </div>

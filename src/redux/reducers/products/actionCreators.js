@@ -19,16 +19,5 @@ export const productsActionCreators = {
       dispatch(productsActionCreators.setError(`Произошла обшибка: ${e}`))
     }
   },
-  loadMoreProducts: (params) => async (dispatch) => {
-    // dispatch(productsActionCreators.setLoading(true))
-    try {
-      const response = await Projects.getProjects(params)
-
-      console.log(response)
-      dispatch(productsActionCreators.loadMore(response.data.data.data))
-    } catch (e) {
-      dispatch(productsActionCreators.setError(console.log(e)))
-    }
-  }
 }
 

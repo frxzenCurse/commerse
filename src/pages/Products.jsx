@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { useActions } from '../hooks/useActions';
 import { productsActionCreators } from '../redux/reducers/products/actionCreators';
 import Loader from "../components/Loader";
-import MyModal from '../components/MyModal';
 import ProjectList from '../components/ProjectList';
 import Filters from '../components/Filters';
+import { useFetching } from '../hooks/useFetching';
+import { Projects } from '../API/PostService';
 
 const { Content } = Layout;
 
@@ -21,9 +22,14 @@ const Products = () => {
     square: [],
     view: "",
   })
-
+  
   const { products, isLoading, error, total } = useSelector(state => state.products)
-  const { fetchProducts, loadMoreProducts } = useActions(productsActionCreators)
+  const { fetchProducts, loadMore } = useActions(productsActionCreators)
+  const [loadMoreProducts, loading, typeError] = useFetching(async () => {
+    const response = await Projects.getProjects({ ...params, page: page })
+
+    loadMore(response.data.data.data)
+  })
 
   useEffect(() => {
     fetchProducts(params)
@@ -32,7 +38,7 @@ const Products = () => {
 
   useEffect(() => {
     if (page > 1) {
-      loadMoreProducts({ ...params, page: page })
+      loadMoreProducts()
     }
   }, [page])
 
@@ -69,7 +75,9 @@ const Products = () => {
                 {total > 12 && total > products.length
                   ?
                   <div className='button-show'>
-                    <Button onClick={() => setPage(page + 1)}>Показать еще</Button>
+                    <Button onClick={() => setPage(page + 1)} loading={loading}>
+                      Показать еще
+                    </Button>
                   </div>
                   :
                   null
