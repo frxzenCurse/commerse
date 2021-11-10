@@ -15,7 +15,7 @@ const ProjectDetail = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   const { products, isLoading, error } = useSelector(state => state.products)
-  const {isAuth} = useSelector(state => state.login)
+  const { isAuth } = useSelector(state => state.login)
   const { fetchProducts } = useActions(productsActionCreators)
 
   const history = useHistory()

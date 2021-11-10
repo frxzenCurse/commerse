@@ -1,7 +1,7 @@
 import { Col, Layout, Menu, Row } from 'antd';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { ThemeContext } from '../context/ThemeContext';
 import { CART, LOGIN, POSTS, PRODUCTS } from '../data/pages';
 import { useActions } from '../hooks/useActions';
@@ -10,6 +10,7 @@ import ThemeChanger from './ThemeChanger';
 
 const Header = ({onClick, themeChange, theme}) => {
 
+  const location = useLocation()
   const history = useHistory()
   const state = useSelector(state => state)
   const { logout } = useActions(AuthActionCreators)
@@ -24,18 +25,18 @@ const Header = ({onClick, themeChange, theme}) => {
         <Col>
           {state.login.isAuth
             ?
-            <Menu disabledOverflow={true} theme={context === 'light' ? 'light' : 'dark'} mode="horizontal">
-              <Menu.Item key='posts' onClick={() => history.push(POSTS)}>Посты</Menu.Item>
-              <Menu.Item key='2' onClick={() => history.push(PRODUCTS)}>Интерьеры</Menu.Item>
-              <Menu.Item key='3' style={{pointerEvents: 'none'}}>{state.login.username}</Menu.Item>
+            <Menu selectedKeys={location.pathname} disabledOverflow={true} theme={context === 'light' ? 'light' : 'dark'} mode="horizontal">
+              <Menu.Item key={POSTS} onClick={() => history.push(POSTS)}>Посты</Menu.Item>
+              <Menu.Item key={PRODUCTS} onClick={() => history.push(PRODUCTS)}>Интерьеры</Menu.Item>
+              <Menu.Item key='username' style={{pointerEvents: 'none'}}>{state.login.username}</Menu.Item>
               <Menu.Item key='4' onClick={() => logout()}>Выйти</Menu.Item>
-              <Menu.Item key='5' onClick={() => history.push(CART)}>Избранное</Menu.Item>
+              <Menu.Item key={CART} onClick={() => history.push(CART)}>Избранное</Menu.Item>
             </Menu>
             :
-            <Menu disabledOverflow={true} theme={context === 'light' ? 'light' : 'dark'} mode="horizontal">
-              <Menu.Item key='4' onClick={() => history.push(POSTS)}>Посты</Menu.Item>
-              <Menu.Item key='1' onClick={() => history.push(PRODUCTS)}>Товары</Menu.Item>
-              <Menu.Item key='2' onClick={() => history.push(LOGIN)}>Логин</Menu.Item>
+            <Menu selectedKeys={location.pathname} disabledOverflow={true} theme={context === 'light' ? 'light' : 'dark'} mode="horizontal">
+              <Menu.Item key={POSTS} onClick={() => history.push(POSTS)}>Посты</Menu.Item>
+              <Menu.Item key={PRODUCTS} onClick={() => history.push(PRODUCTS)}>Товары</Menu.Item>
+              <Menu.Item key={LOGIN} onClick={() => history.push(LOGIN)}>Логин</Menu.Item>
               <Menu.Item key='3' onClick={onClick}>Избранное</Menu.Item>
             </Menu>
           }

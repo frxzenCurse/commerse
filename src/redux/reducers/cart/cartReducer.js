@@ -16,7 +16,7 @@ const cartReducer = (state = initialState, action) => {
       const arr = [...state.items].filter(item => item.id !== action.payload)
       localStorage.setItem('cartItems', JSON.stringify(arr))
 
-      return {...state,items: [...state.items].filter(item => item.id !== action.payload)}
+      return {...state,items: arr}
     }
     default:
       return state

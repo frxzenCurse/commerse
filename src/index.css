@@ -307,7 +307,7 @@ header.header-dark {
 
 .project-card__title {
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: auto;
 
   font-size: 18px;
   font-weight: 500;
@@ -316,6 +316,8 @@ header.header-dark {
 }
 
 .project-card__designer {
+  margin-top: 25px;
+
   color: #7d8281;
   font-size: 14px;
   font-weight: 600;

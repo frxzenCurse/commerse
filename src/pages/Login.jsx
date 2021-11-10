@@ -47,10 +47,10 @@ const Login = () => {
           <Form.Item
             label="Email"
             name="email"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: true, message: 'Please input your email!' }]}
             {...formItemLayout}
           >
-            <Input value={username} onChange={e => setUsername(e.target.value)} />
+            <Input type='email' value={username} onChange={e => setUsername(e.target.value)} />
           </Form.Item>
           <Form.Item
             label="Password"

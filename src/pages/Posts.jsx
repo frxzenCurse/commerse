@@ -65,8 +65,8 @@ const Posts = () => {
 
   return (
     <div style={{ padding: 60, overflow: 'hidden', transition: '.3s' }}>
-      <Row>
-        <Col span={6}>
+      <Row justify='space-between'>
+        <Col span={4}>
           <Sort
             placeholder='Сортировка'
             options={[

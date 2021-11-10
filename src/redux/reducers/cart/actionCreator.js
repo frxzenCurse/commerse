@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM, GET_TOTAL_SUM, REMOVE_CART_ITEM } from "./actions";
+import { ADD_CART_ITEM, REMOVE_CART_ITEM } from "./actions";
 
 
 const cartActionCreators = {
