@@ -8,6 +8,7 @@ import ProjectList from '../components/ProjectList';
 import Filters from '../components/Filters';
 import { useFetching } from '../hooks/useFetching';
 import { Projects } from '../API/PostService';
+import { ImageDraw, mouseHandler } from '../animation/ImageDraw';
 
 const { Content } = Layout;
 
@@ -41,6 +42,10 @@ const Products = () => {
       loadMoreProducts()
     }
   }, [page])
+
+  useEffect(() => {
+    mouseHandler('canvas', 'project-card__img')
+  }, [])
 
   function updateParams(boolean, item, value) {
     if (boolean) {
@@ -86,7 +91,7 @@ const Products = () => {
             }
           </Col>
         </Row>
-        
+        <canvas id='canvas'></canvas>
       </Content>
     </div>
   )
