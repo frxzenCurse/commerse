@@ -5,6 +5,7 @@ import DesignerInfo from './DesignerInfo'
 import cartActionCreators from '../redux/reducers/cart/actionCreator'
 import { useActions } from '../hooks/useActions'
 import { useSelector } from 'react-redux'
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 const ProjectInfo = ({ project, onClick }) => {
 
@@ -53,9 +54,26 @@ const ProjectInfo = ({ project, onClick }) => {
         <div className={cl.label}>{project.price_segment.title}</div>
       </div>
       <div className={cl.button}>
-        <Button onClick={() => login.isAuth ? setIsAdded(!isAdded) : onClick()}>
-          {isAdded ? 'Удалить из избранного' : 'Добавить в избранное'}
-        </Button>
+        <SwitchTransition mode='out-in'>
+          <CSSTransition
+            key={isAdded}
+            addEndListener={(node, done) => {
+              node.addEventListener("transitionend", done, false);
+            }}
+            classNames="fade"
+          >
+            <div>
+            <Button 
+              type={isAdded ? 'primary' : 'default'}
+              className='btn' 
+              onClick={() => login.isAuth ? setIsAdded(!isAdded) : onClick()}
+            >
+              {isAdded ? 'Удалить из избранного' : 'Добавить в избранное'}
+            </Button>
+            </div>
+          </CSSTransition>
+        </SwitchTransition>
+
       </div>
       <DesignerInfo info={project.designer} />
     </div>

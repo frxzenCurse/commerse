@@ -49,23 +49,20 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (theme === 'dark') {
-      document.body.classList.add('dark')
-    } else {
-      document.body.classList.remove('dark')
-    }
 
     localStorage.setItem('theme', theme)
   }, [theme])
 
   return (
     <ThemeContext.Provider value={theme}>
-      <BrowserRouter>
-        <Header onClick={onClick} themeChange={themeChange} theme={theme} />
-            <AppRouter />
-        {!isAuth &&
-          <MyModal isModalVisible={isVisible} onClick={onClick} />}
-      </BrowserRouter>
+      <div className={theme === 'light' ? 'theme' : 'theme dark'}>
+        <BrowserRouter>
+          <Header onClick={onClick} themeChange={themeChange} theme={theme} />
+              <AppRouter />
+          {!isAuth &&
+            <MyModal isModalVisible={isVisible} onClick={onClick} />}
+        </BrowserRouter>
+      </div>
     </ThemeContext.Provider>
   );
 }

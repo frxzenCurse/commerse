@@ -45,11 +45,39 @@ img {
 
 #root {
   min-width: 320px;
-  /* overflow-x: hidden; */
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+.theme::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+
+  background: #001529;
+  transform-origin: left top;
+  border-radius: 0 0 100%;
+  transform: scale(0);
+}
+
+.theme.dark::before {
+  transition-property: transform, border-radius;
+  transition-duration: .5s, .2s;
+  transition-delay: 0.01s, .3s;
+
+  transform: scale(1);
+  border-radius: 0;
 }
 
 .dark {
-  background: #001529;
+  /* background: ; */
+
 }
 
 .dark .ant-empty-description {
@@ -369,4 +397,25 @@ header.header-dark {
   top: 0;
   left: 0;
   pointer-events: none;
+}
+
+.fade-enter .btn {
+  transform: rotateX(-90deg);
+}
+
+.fade-enter-active .btn {
+  transform: rotateX(0);
+}
+
+.fade-exit .btn {
+  transform: rotateX(0);
+}
+
+.fade-exit-active .btn {
+  transform: rotateX(-90deg);
+}
+
+.fade-enter-active .btn,
+.fade-exit-active .btn {
+  transition: transform 300ms;
 }

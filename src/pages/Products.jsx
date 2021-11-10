@@ -8,7 +8,7 @@ import ProjectList from '../components/ProjectList';
 import Filters from '../components/Filters';
 import { useFetching } from '../hooks/useFetching';
 import { Projects } from '../API/PostService';
-import { ImageDraw, mouseHandler } from '../animation/ImageDraw';
+import { mouseHandler } from '../animation/ImageDraw';
 
 const { Content } = Layout;
 
@@ -40,6 +40,9 @@ const Products = () => {
   useEffect(() => {
     if (page > 1) {
       loadMoreProducts()
+    }
+    if (typeError) {
+      console.log(typeError);
     }
   }, [page])
 
