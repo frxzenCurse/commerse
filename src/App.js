@@ -15,14 +15,9 @@ function App() {
   const { addItem } = useActions(cartActionCreators)
   const { isAuth } = useSelector(state => state.login)
   const [isVisible, setIsVisible] = useState(false)
-  const [theme, setTheme] = useState('light')
 
   function onClick() {
     setIsVisible(!isVisible)
-  }
-
-  function themeChange(event) {
-    setTheme(event)
   }
 
   useEffect(() => {
@@ -43,7 +38,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header onClick={onClick} themeChange={themeChange} theme={theme} />
+      <Header onClick={onClick} />
           <AppRouter />
       {!isAuth &&
         <MyModal isModalVisible={isVisible} onClick={onClick} />}

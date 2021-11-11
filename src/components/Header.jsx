@@ -4,9 +4,8 @@ import { useHistory, useLocation } from 'react-router';
 import { CART, LOGIN, POSTS, PRODUCTS } from '../data/pages';
 import { useActions } from '../hooks/useActions';
 import { AuthActionCreators } from '../redux/reducers/login/actionCreators';
-import ThemeChanger from './ThemeChanger';
 
-const Header = ({ onClick, themeChange, theme }) => {
+const Header = ({ onClick }) => {
 
   const location = useLocation()
   const history = useHistory()

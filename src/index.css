@@ -245,3 +245,6 @@ header.header-dark {
   transition: transform 300ms;
 }
 
+.parallax-container {
+  overflow: hidden;
+}

@@ -29,6 +29,7 @@ const ThumbSlider = ({ project }) => {
       {project.images.length > 1
         ?
         <>
+          <div className='parallax-container'>
           <Swiper {...params}>
             {project.images.map((item, index) =>
               <SwiperSlide key={index}>
@@ -36,6 +37,7 @@ const ThumbSlider = ({ project }) => {
               </SwiperSlide>
             )}
           </Swiper>
+          </div>
           <Swiper {...thumbsParams} className={cl.thumbs}>
             {project.images.map((item, index) =>
               <SwiperSlide key={index} className='thumb-slide'>
