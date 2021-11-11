@@ -1,8 +1,7 @@
 import { Form, Input, Button, Row } from 'antd';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router';
-import { ThemeContext } from '../context/ThemeContext';
 import { PRODUCTS } from '../data/pages';
 import { useActions } from '../hooks/useActions';
 import { AuthActionCreators } from '../redux/reducers/login/actionCreators';
@@ -17,7 +16,6 @@ const Login = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const context = useContext(ThemeContext)
 
   const { error, isLoading, isAuth } = useSelector(state => state.login)
   const { login, setError } = useActions(AuthActionCreators)
@@ -36,7 +34,7 @@ const Login = () => {
   }, [isAuth])
 
   return (
-    <div className={context === 'dark' ? 'form-dark' : ''}>
+    <div>
       <Row justify='center' style={{ marginTop: 50, }}>
         <Form
           onFinish={sumbitHandler}
@@ -64,7 +62,6 @@ const Login = () => {
             <Button
               htmlType="submit"
               loading={isLoading}
-              type={context === 'light' ? 'light' : 'primary'}
             >
               Submit
             </Button>

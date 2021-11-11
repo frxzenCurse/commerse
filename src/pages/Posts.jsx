@@ -1,7 +1,7 @@
 import PostList from '../components/PostList';
 import Sort from '../components/Sort';
 import Search from '../components/Search';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { Row, Col, Pagination, Button } from 'antd';
 import { PostService } from '../API/PostService';
@@ -9,7 +9,6 @@ import { useFetching } from '../hooks/useFetching';
 import { useSearch } from '../hooks/useSearch';
 import Loader from '../components/Loader';
 import PostForm from '../components/PostForm';
-import { ThemeContext } from '../context/ThemeContext';
 
 const Posts = () => {
 
@@ -22,8 +21,6 @@ const Posts = () => {
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
   const [isMounted, setIsMounted] = useState(true) 
-  
-  const context = useContext(ThemeContext)
   
   const searchedAndSortedPosts = useSearch(posts, selectedSort, value)
   const [fetchPosts, isLoading, error] = useFetching(async () => {
@@ -78,7 +75,6 @@ const Posts = () => {
           <div style={{ marginTop: 15 }}>
             <Button 
               onClick={modalHandler}
-              type={context === 'light' ? 'light' : 'primary'}
             >
               Добавить пост
             </Button>

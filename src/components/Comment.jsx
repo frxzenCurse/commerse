@@ -1,13 +1,9 @@
 import { List } from 'antd';
-import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
 
 const Comment = ({ data }) => {
 
-  const context = useContext(ThemeContext)
-
   return (
-    <div className={context === 'dark' ? 'list-dark' : ''}>
+    <div>
       <List
         className="demo-loadmore-list"
         itemLayout="horizontal"

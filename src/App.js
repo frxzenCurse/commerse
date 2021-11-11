@@ -8,15 +8,14 @@ import MyModal from './components/MyModal';
 import { useActions } from './hooks/useActions';
 import cartActionCreators from './redux/reducers/cart/actionCreator';
 import { AuthActionCreators } from './redux/reducers/login/actionCreators';
-import {ThemeContext} from './context/ThemeContext';
 
 function App() {
 
   const { setUsername, setAuth } = useActions(AuthActionCreators)
-  const { addItem, getSum } = useActions(cartActionCreators)
+  const { addItem } = useActions(cartActionCreators)
   const { isAuth } = useSelector(state => state.login)
   const [isVisible, setIsVisible] = useState(false)
-  const [theme, setTheme] = useState('')
+  const [theme, setTheme] = useState('light')
 
   function onClick() {
     setIsVisible(!isVisible)
@@ -32,12 +31,6 @@ function App() {
       setAuth(true)
     }
 
-    if (localStorage.getItem('theme')) {
-      setTheme(localStorage.getItem('theme'))
-    } else {
-      setTheme('light')
-    }
-
     if (localStorage.getItem('cartItems')) {
       const array = JSON.parse(localStorage.getItem('cartItems'))
 
@@ -48,22 +41,13 @@ function App() {
     // eslint-disable-next-line
   }, [])
 
-  useEffect(() => {
-
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
   return (
-    <ThemeContext.Provider value={theme}>
-      <div className={theme === 'light' ? 'theme' : 'theme dark'}>
-        <BrowserRouter>
-          <Header onClick={onClick} themeChange={themeChange} theme={theme} />
-              <AppRouter />
-          {!isAuth &&
-            <MyModal isModalVisible={isVisible} onClick={onClick} />}
-        </BrowserRouter>
-      </div>
-    </ThemeContext.Provider>
+    <BrowserRouter>
+      <Header onClick={onClick} themeChange={themeChange} theme={theme} />
+          <AppRouter />
+      {!isAuth &&
+        <MyModal isModalVisible={isVisible} onClick={onClick} />}
+    </BrowserRouter>
   );
 }
 

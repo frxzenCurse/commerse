@@ -1,9 +1,8 @@
 import { Button, Card } from 'antd';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useFetching } from '../hooks/useFetching';
 import { PostService } from '../API/PostService';
 import Comment from './Comment'
-import { ThemeContext } from '../context/ThemeContext';
 
 const { Meta } = Card;
 
@@ -11,8 +10,6 @@ const SinglePost = ({ post, img, pageId }) => {
 
   const [comments, setComments] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
-
-  const context = useContext(ThemeContext)
 
   const [fetchComments, isLoading, error] = useFetching(async () => {
     const response = await PostService.getComments(pageId)
@@ -31,7 +28,6 @@ const SinglePost = ({ post, img, pageId }) => {
   }
 
   return (
-    <div className={context === 'dark' ? 'card-dark' : ''}>
       <Card
         style={{ marginBottom: 30 }}
         type='inner'
@@ -53,7 +49,6 @@ const SinglePost = ({ post, img, pageId }) => {
             onClick={commentsToggle}
             loading={isLoading}
             block
-            type={context === 'light' ? 'light' : 'primary'}
           >
             {isLoaded ? 'Закрыть комментарии' : 'Открыть комментарии'}
           </Button>
@@ -66,7 +61,6 @@ const SinglePost = ({ post, img, pageId }) => {
           }
         </div>
       </Card>
-    </div>
   )
 }
 

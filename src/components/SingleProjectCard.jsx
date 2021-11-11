@@ -1,9 +1,24 @@
 import { Empty, Col, Row } from 'antd';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useActions } from '../hooks/useActions';
+import { productsActionCreators } from '../redux/reducers/products/actionCreators';
+import Loader from './Loader';
 import ProductSlider from './ProductSlider';
 import ProjectInfo from './ProjectInfo';
 import ThumbSlider from './ThumbSlider';
 
-const SingleProjectCard = ({project, data, onClick}) => {
+const SingleProjectCard = ({ project, data, onClick }) => {
+
+  const { products, isLoading, error } = useSelector(state => state.products)
+  const { fetchProducts } = useActions(productsActionCreators)
+
+  useEffect(() => {
+
+    if (!products.length) {
+      fetchProducts()
+    }
+  }, [])
 
   return (
     <div className='single-project'>
@@ -30,7 +45,13 @@ const SingleProjectCard = ({project, data, onClick}) => {
           <div className='single-project__description'>
             {project.description}
           </div>
-          <ProductSlider data={data} />
+          {error && <h1 style={{ color: 'red' }}>{error}</h1>}
+          {isLoading
+            ?
+            <Loader />
+            :
+            <ProductSlider data={products} />
+          }
         </>
         :
         <Empty />

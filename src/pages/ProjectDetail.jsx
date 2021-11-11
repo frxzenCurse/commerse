@@ -8,25 +8,28 @@ import { useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import SingleProjectCard from "../components/SingleProjectCard";
 import MyModal from "../components/MyModal";
+import { useFetching } from "../hooks/useFetching";
+import { Projects } from "../API/PostService";
 
 const ProjectDetail = () => {
 
   const [project, setProject] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
-
-  const { products, isLoading, error } = useSelector(state => state.products)
-  const { isAuth } = useSelector(state => state.login)
-  const { fetchProducts } = useActions(productsActionCreators)
-
   const history = useHistory()
   const { id } = useParams()
 
+  const { isAuth } = useSelector(state => state.login)
+  
+  const [fetchProject, isLoading, error] = useFetching(async () => {
+    const code = id.slice(-3)
+    const response = await Projects.getProjects({ projectId: [+code] })
+
+    setProject(response.data.data.data[0])
+  })
+
   useEffect(() => {
-    if (!products.length) {
-      fetchProducts()
-    }
-    setProject(products.find(item => item.code === id))
-  }, [products])
+    fetchProject()
+  }, [])  
 
   function modalHandler() {
     if (!isAuth) {
@@ -42,7 +45,7 @@ const ProjectDetail = () => {
         ?
         <Loader />
         :
-        <SingleProjectCard project={project} data={products} onClick={modalHandler} />
+        <SingleProjectCard project={project} onClick={modalHandler} />
       }
       {!isAuth && <MyModal isModalVisible={isVisible} onClick={modalHandler} />}
     </div>
