@@ -9,6 +9,7 @@ import Filters from '../components/Filters';
 import { useFetching } from '../hooks/useFetching';
 import { Projects } from '../API/PostService';
 import { mouseHandler } from '../animation/ImageDraw';
+import Slide from 'react-reveal/Slide';
 
 const { Content } = Layout;
 
@@ -23,7 +24,7 @@ const Products = () => {
     square: [],
     view: "",
   })
-  
+
   const { products, isLoading, error, total } = useSelector(state => state.products)
   const { fetchProducts, loadMore } = useActions(productsActionCreators)
   const [loadMoreProducts, loading, typeError] = useFetching(async () => {
@@ -70,7 +71,9 @@ const Products = () => {
       <Content>
         <Row justify='space-between'>
           <Col span={4}>
-            <Filters onChange={updateParams} singleChange={updateSingleParams} />
+            <Slide left>
+              <Filters onChange={updateParams} singleChange={updateSingleParams} />
+            </Slide>
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}

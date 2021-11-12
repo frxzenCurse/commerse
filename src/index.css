@@ -177,7 +177,7 @@ header.header-dark {
 }
 
 .single-project__title {
-  margin: 20px 0 40px;
+  margin-right: 7px;
 
   font-size: 35px;
 }
@@ -195,6 +195,11 @@ header.header-dark {
   margin-top: 40px;
 
   font-size: 16px;
+}
+
+.single-project__wrapper {
+  margin: 20px 0 40px;
+  display: flex;
 }
 
 .thumb-slide {
@@ -245,6 +250,9 @@ header.header-dark {
   transition: transform 300ms;
 }
 
-.parallax-container {
-  overflow: hidden;
+.login-success {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
 }

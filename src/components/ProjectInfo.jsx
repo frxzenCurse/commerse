@@ -6,6 +6,8 @@ import cartActionCreators from '../redux/reducers/cart/actionCreator'
 import { useActions } from '../hooks/useActions'
 import { useSelector } from 'react-redux'
 import { SwitchTransition, CSSTransition } from "react-transition-group";
+import Bounce from 'react-reveal/Bounce';
+import Fade from 'react-reveal/Fade';
 
 const ProjectInfo = ({ project, onClick }) => {
 
@@ -36,47 +38,52 @@ const ProjectInfo = ({ project, onClick }) => {
   }, [isAdded])
 
   return (
-    <div>
-      <div className={cl.item}>
-        <div className={cl.text}>Помещение</div>
-        <div className={cl.label}>{rooms.join(', ')}</div>
-      </div>
-      <div className={cl.item}>
-        <div className={cl.text}>Площадь</div>
-        <div className={cl.label}>{project.square} кв.м</div>
-      </div>
-      <div className={cl.item}>
-        <div className={cl.text}>Тип здания</div>
-        <div className={cl.label}>{project.building_type.title}</div>
-      </div>
-      <div className={cl.item}>
-        <div className={cl.text}>Бюджет</div>
-        <div className={cl.label}>{project.price_segment.title}</div>
-      </div>
-      <div className={cl.button}>
-        <SwitchTransition mode='out-in'>
-          <CSSTransition
-            key={isAdded}
-            addEndListener={(node, done) => {
-              node.addEventListener("transitionend", done, false);
-            }}
-            classNames="fade"
-          >
-            <div>
-            <Button 
-              type={isAdded ? 'primary' : 'default'}
-              className='btn' 
-              onClick={() => login.isAuth ? setIsAdded(!isAdded) : onClick()}
-            >
-              {isAdded ? 'Удалить из избранного' : 'Добавить в избранное'}
-            </Button>
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
-
-      </div>
-      <DesignerInfo info={project.designer} />
-    </div>
+    <>
+      <Bounce right cascade>
+        <div>
+          <div className={cl.item}>
+            <div className={cl.text}>Помещение</div>
+            <div className={cl.label}>{rooms.join(', ')}</div>
+          </div>
+          <div className={cl.item}>
+            <div className={cl.text}>Площадь</div>
+            <div className={cl.label}>{project.square} кв.м</div>
+          </div>
+          <div className={cl.item}>
+            <div className={cl.text}>Тип здания</div>
+            <div className={cl.label}>{project.building_type.title}</div>
+          </div>
+          <div className={cl.item}>
+            <div className={cl.text}>Бюджет</div>
+            <div className={cl.label}>{project.price_segment.title}</div>
+          </div>
+          <div className={cl.button}>
+            <SwitchTransition mode='out-in'>
+              <CSSTransition
+                key={isAdded}
+                addEndListener={(node, done) => {
+                  node.addEventListener("transitionend", done, false);
+                }}
+                classNames="fade"
+              >
+                <div>
+                  <Button
+                    type={isAdded ? 'primary' : 'default'}
+                    className='btn'
+                    onClick={() => login.isAuth ? setIsAdded(!isAdded) : onClick()}
+                  >
+                    {isAdded ? 'Удалить из избранного' : 'Добавить в избранное'}
+                  </Button>
+                </div>
+              </CSSTransition>
+            </SwitchTransition>
+          </div>
+        </div>
+      </Bounce>
+      <Fade bottom>
+        <DesignerInfo info={project.designer} />
+      </Fade>
+    </>
   )
 }
 

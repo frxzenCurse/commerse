@@ -3,18 +3,19 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useActions } from '../hooks/useActions';
 import { productsActionCreators } from '../redux/reducers/products/actionCreators';
+import Trail from '../UI/Trail';
 import Loader from './Loader';
 import ProductSlider from './ProductSlider';
 import ProjectInfo from './ProjectInfo';
 import ThumbSlider from './ThumbSlider';
+import Fade from 'react-reveal/Fade';
 
-const SingleProjectCard = ({ project, data, onClick }) => {
+const SingleProjectCard = ({ project, onClick }) => {
 
   const { products, isLoading, error } = useSelector(state => state.products)
   const { fetchProducts } = useActions(productsActionCreators)
 
   useEffect(() => {
-
     if (!products.length) {
       fetchProducts()
     }
@@ -26,9 +27,9 @@ const SingleProjectCard = ({ project, data, onClick }) => {
         ?
         <>
           <div className='single-project__label'>{project.object_type.title}</div>
-          <h1 className='single-project__title'>
+          <Trail name="single-project__title" container='single-project__wrapper'>
             {project.title}
-          </h1>
+          </Trail>
           <Row justify='space-between'>
             <Col span={12}>
               {project.images.length
@@ -42,15 +43,19 @@ const SingleProjectCard = ({ project, data, onClick }) => {
               <ProjectInfo project={project} onClick={onClick} />
             </Col>
           </Row>
-          <div className='single-project__description'>
-            {project.description}
-          </div>
+          <Fade bottom>
+            <div className='single-project__description'>
+              {project.description}
+            </div>
+          </Fade>
           {error && <h1 style={{ color: 'red' }}>{error}</h1>}
           {isLoading
             ?
             <Loader />
             :
-            <ProductSlider data={products} />
+            <Fade bottom>
+              <ProductSlider data={products} />
+            </Fade>
           }
         </>
         :
