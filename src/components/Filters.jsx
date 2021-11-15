@@ -4,10 +4,11 @@ import axios from "axios";
 import { useFetching } from '../hooks/useFetching';
 import Loader from "./Loader";
 import FilterList from "./FilterList";
+import Slide from 'react-reveal/Slide';
 
 const { Panel } = Collapse;
 
-const Filters = ({onChange, singleChange}) => {
+const Filters = ({ onChange, singleChange }) => {
 
   const [data, setData] = useState(null)
 
@@ -19,11 +20,14 @@ const Filters = ({onChange, singleChange}) => {
     })
 
     setData(response.data.data.filter);
+    console.log(response);
   })
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  // console.log(data);
 
   return (
     <div className='filters'>
@@ -32,24 +36,26 @@ const Filters = ({onChange, singleChange}) => {
         ?
         <Loader />
         :
-        <Collapse>
-          {data
-            ?
-            data.options.map(item =>
-              <Panel header={item.name} key={item.filter} forceRender={true}>
-                <FilterList 
-                  onChange={onChange} 
-                  multiple={item.multiple} 
-                  filter={item.filter} 
-                  values={data.values} 
-                  singleChange={singleChange}
-                />
-              </Panel>
-            )
-            :
-            null
-          }
-        </Collapse>
+        <Slide left>
+          {/* <Collapse>
+            {data
+              ?
+              data.options.map(item =>
+                <Panel header={item.name} key={item.filter} forceRender={true}>
+                  <FilterList 
+                    onChange={onChange} 
+                    multiple={item.multiple} 
+                    filter={item.filter} 
+                    values={data.values} 
+                    singleChange={singleChange}
+                  />
+                </Panel>
+              )
+              :
+              null
+            }
+          </Collapse> */}
+        </Slide>
       }
     </div>
   )

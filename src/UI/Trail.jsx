@@ -9,7 +9,7 @@ const Trail = ({ children, name, container }) => {
     opacity: 1,
   });
   const from = (_i) => ({
-    x: 20, opacity: 0, 
+    x: 50, opacity: 0,
   });
 
   const [trail, api] = useTrail(arr.length, (i) => ({

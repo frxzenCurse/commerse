@@ -9,7 +9,7 @@ import Filters from '../components/Filters';
 import { useFetching } from '../hooks/useFetching';
 import { Projects } from '../API/PostService';
 import { mouseHandler } from '../animation/ImageDraw';
-import Slide from 'react-reveal/Slide';
+
 
 const { Content } = Layout;
 
@@ -48,7 +48,7 @@ const Products = () => {
   }, [page])
 
   useEffect(() => {
-    mouseHandler('canvas', 'project-card__img')
+    // mouseHandler('canvas', 'project-card__img')
   }, [])
 
   function updateParams(boolean, item, value) {
@@ -71,9 +71,7 @@ const Products = () => {
       <Content>
         <Row justify='space-between'>
           <Col span={4}>
-            <Slide left>
-              <Filters onChange={updateParams} singleChange={updateSingleParams} />
-            </Slide>
+            <Filters onChange={updateParams} singleChange={updateSingleParams} />
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}

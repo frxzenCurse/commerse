@@ -18,9 +18,7 @@ const ProjectInfo = ({ project, onClick }) => {
   const { addItem, removeItem } = useActions(cartActionCreators)
 
   useEffect(() => {
-    project.rooms.forEach(item => {
-      setRooms([...rooms, item.room.title])
-    })
+    setRooms(project.rooms.map(item => item.room.title))
 
     const item = cart.items.find(item => item.id === project.id)
 
