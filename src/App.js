@@ -24,6 +24,7 @@ function App() {
     if (localStorage.getItem('auth')) {
       setUsername(localStorage.getItem('username'))
       setAuth(true)
+      console.log(localStorage.getItem('auth'));
     }
 
     if (localStorage.getItem('cartItems')) {

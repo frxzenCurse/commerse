@@ -9,6 +9,7 @@ import ProductSlider from './ProductSlider';
 import ProjectInfo from './ProjectInfo';
 import ThumbSlider from './ThumbSlider';
 import Fade from 'react-reveal/Fade';
+import FormFollow from './FormFollow';
 
 const SingleProjectCard = ({ project, onClick }) => {
 
@@ -47,6 +48,9 @@ const SingleProjectCard = ({ project, onClick }) => {
             <div className='single-project__description'>
               {project.description}
             </div>
+          </Fade>
+          <Fade bottom>
+            <FormFollow />
           </Fade>
           {error && <h1 style={{ color: 'red' }}>{error}</h1>}
           {isLoading
