@@ -19,7 +19,6 @@ export const AuthActionCreators = {
       })
 
       localStorage.setItem('auth', response.data.access_token)
-      localStorage.setItem('username', username)
       dispatch(AuthActionCreators.setAuth(true))
       dispatch(AuthActionCreators.setUsername(username))
     } catch (e) {

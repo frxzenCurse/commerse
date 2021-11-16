@@ -20,7 +20,7 @@ const Filters = ({ onChange, singleChange }) => {
     })
 
     setData(response.data.data.filter);
-    console.log(response);
+    // console.log(response);
   })
 
   useEffect(() => {

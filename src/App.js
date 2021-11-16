@@ -8,10 +8,12 @@ import MyModal from './components/MyModal';
 import { useActions } from './hooks/useActions';
 import cartActionCreators from './redux/reducers/cart/actionCreator';
 import { AuthActionCreators } from './redux/reducers/login/actionCreators';
+import { userActionCreators } from './redux/reducers/user/actionCreators';
 
 function App() {
 
   const { setUsername, setAuth } = useActions(AuthActionCreators)
+  const { fetchUser } = useActions(userActionCreators)
   const { addItem } = useActions(cartActionCreators)
   const { isAuth } = useSelector(state => state.login)
   const [isVisible, setIsVisible] = useState(false)
@@ -24,7 +26,6 @@ function App() {
     if (localStorage.getItem('auth')) {
       setUsername(localStorage.getItem('username'))
       setAuth(true)
-      console.log(localStorage.getItem('auth'));
     }
 
     if (localStorage.getItem('cartItems')) {
@@ -37,10 +38,16 @@ function App() {
     // eslint-disable-next-line
   }, [])
 
+  useEffect(() => {
+    if (isAuth) {
+      fetchUser(localStorage.getItem('auth'))
+    }
+  }, [isAuth])
+
   return (
     <BrowserRouter>
       <Header onClick={onClick} />
-          <AppRouter />
+      <AppRouter />
       {!isAuth &&
         <MyModal isModalVisible={isVisible} onClick={onClick} />}
     </BrowserRouter>

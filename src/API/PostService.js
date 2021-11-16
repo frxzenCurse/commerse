@@ -39,3 +39,13 @@ export const Projects = {
     return axios.post('https://api.d4u.dev.dterra.eu/api/project/list', {...body})
   }
 }
+
+export const User = {
+  getUser: (token) => {
+    return axios.post('https://api.d4u.dev.dterra.eu/api/user/info', {}, {
+      headers: {
+        authorization: 'Bearer ' + token
+      }
+    })
+  }
+}
