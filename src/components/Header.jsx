@@ -20,7 +20,7 @@ const Header = ({ onClick }) => {
     history.push(LOGIN)
   }
 
-  console.log(state.user.user);
+  // console.log(state.user.user);
 
   return (
     <Layout.Header style={{ height: 65, transition: '.3s' }} className='header-light'>

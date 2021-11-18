@@ -5,18 +5,19 @@ import { useFetching } from '../hooks/useFetching';
 import Loader from "./Loader";
 import FilterList from "./FilterList";
 import Slide from 'react-reveal/Slide';
+import qs from 'qs'
+import { useLocation } from 'react-router';
 
 const { Panel } = Collapse;
 
-const Filters = ({ onChange, singleChange }) => {
+const Filters = ({ onChange }) => {
 
   const [data, setData] = useState(null)
-
+  const {search} = useLocation()
   const [fetchData, isLoading, error] = useFetching(async () => {
     const response = await axios.post('https://api.d4u.dev.dterra.eu/api/project/filter', {
-      objectTypeId: [4],
-      squareMin: 30,
-      squareMax: 60
+      view: "projectMain",
+      priceSegmentId: [1]
     })
 
     setData(response.data.data.filter);
@@ -26,7 +27,14 @@ const Filters = ({ onChange, singleChange }) => {
     fetchData()
   }, [])
 
-  // console.log(data);
+  useEffect(() => {
+    if (search) {
+      const url = qs.parse(search.substr(1))
+      for (let key in url) {
+        onChange(key, url[key])
+      }
+    }
+  }, [search])
 
   return (
     <div className='filters'>
@@ -36,24 +44,23 @@ const Filters = ({ onChange, singleChange }) => {
         <Loader />
         :
         <Slide left>
-          {/* <Collapse>
+          <Collapse>
             {data
               ?
-              data.options.map(item =>
+              data.map(item =>
                 <Panel header={item.name} key={item.filter} forceRender={true}>
                   <FilterList 
                     onChange={onChange} 
                     multiple={item.multiple} 
                     filter={item.filter} 
-                    values={data.values} 
-                    singleChange={singleChange}
+                    values={item.values} 
                   />
                 </Panel>
               )
               :
               null
             }
-          </Collapse> */}
+          </Collapse>
         </Slide>
       }
     </div>

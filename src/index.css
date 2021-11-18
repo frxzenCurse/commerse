@@ -373,3 +373,35 @@ header.header-dark {
   color: red;
   font-size: 16px;
 }
+
+.user {
+  display: flex;
+}
+
+.user__col:nth-child(2) {
+  margin-left: 40px;
+}
+
+.user__avatar {
+  display: block;
+  width: 100px;
+  height: 100px;
+
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user__name {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.user__email {
+  margin-bottom: 12px;
+
+  font-size: 18px;
+}
+
+.user__phone {
+  font-size: 20px;
+}

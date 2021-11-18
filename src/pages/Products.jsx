@@ -8,8 +8,6 @@ import ProjectList from '../components/ProjectList';
 import Filters from '../components/Filters';
 import { useFetching } from '../hooks/useFetching';
 import { Projects } from '../API/PostService';
-import { mouseHandler } from '../animation/ImageDraw';
-
 
 const { Content } = Layout;
 
@@ -47,23 +45,12 @@ const Products = () => {
     }
   }, [page])
 
-  useEffect(() => {
-    // mouseHandler('canvas', 'project-card__img')
-  }, [])
-
-  function updateParams(boolean, item, value) {
-    if (boolean) {
-      setParams({ ...params, [item]: [...params[item], value] });
+  function updateParams(item, value) {
+    if (value.length > 1) {
+      setParams({ ...params, [item]: [...value].map(Number) });
     } else {
-      setParams({
-        ...params,
-        [item]: [...params[item]].filter((item) => item !== value),
-      });
+      setParams({ ...params, [item]: [value].map(Number) });
     }
-  }
-
-  function updateSingleParams(value, item) {
-    setParams({ ...params, [item]: [value] })
   }
 
   return (
@@ -71,7 +58,7 @@ const Products = () => {
       <Content>
         <Row justify='space-between'>
           <Col span={4}>
-            <Filters onChange={updateParams} singleChange={updateSingleParams} />
+            <Filters onChange={updateParams}/>
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}
