@@ -1,15 +1,25 @@
 import { Radio } from "antd"
 import { useEffect } from "react"
 import { useHistory, useLocation } from "react-router"
+import qs from 'qs'
 
-const MyRadioBtn = ({children, filter, change, ...props}) => {
+const MyRadioBtn = ({ children, filter, init, change, ...props }) => {
 
   const url = useLocation()
   const history = useHistory()
 
   useEffect(() => {
+    init(filter)
+  }, [])
+
+  useEffect(() => {
     if (change === props.value) {
-      history.push(`?${url.search.substr(1)}` + `${url.search ? '&' : ''}${filter}=${props.value}`)
+      const id = qs.parse(url.search, { ignoreQueryPrefix: true })
+      id[filter] = change
+
+      history.push({
+        search: qs.stringify(id)
+      })
     }
   }, [change])
 

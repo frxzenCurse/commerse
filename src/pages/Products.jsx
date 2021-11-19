@@ -15,15 +15,16 @@ const { Content } = Layout;
 
 const Products = () => {
 
-  const [page, setPage] = useState(1)
-  const [params, setParams] = useState({
+  const initialParams = {
     buildingTypeId: [],
     objectTypeId: [],
     priceSegmentId: [],
     roomId: [],
     square: [],
     view: "",
-  })
+  }
+  const [page, setPage] = useState(1)
+  const [params, setParams] = useState({ ...initialParams })
   const { search } = useLocation()
   const { products, isLoading, error, total } = useSelector(state => state.products)
   const { fetchProducts, loadMore } = useActions(productsActionCreators)
@@ -53,20 +54,13 @@ const Products = () => {
 
       for (let key in url) {
         if (url[key].length > 1) {
-          setParams({ ...params, [key]: url[key].map(Number) });
+          setParams({ ...initialParams, [key]: url[key].map(Number) });
         } else {
-          setParams({ ...params, [key]: [url[key]].map(Number) });
+          setParams({ ...initialParams, [key]: [url[key]].map(Number) });
         }
       }
     } else {
-      setParams({
-        buildingTypeId: [],
-        objectTypeId: [],
-        priceSegmentId: [],
-        roomId: [],
-        square: [],
-        view: "",
-      })
+      setParams({ ...initialParams })
     }
   }, [search])
 
