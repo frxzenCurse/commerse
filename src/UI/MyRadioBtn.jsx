@@ -18,7 +18,7 @@ const MyRadioBtn = ({ children, filter, init, change, ...props }) => {
       id[filter] = change
 
       history.push({
-        search: qs.stringify(id)
+        search: qs.stringify(id, { indices: false })
       })
     }
   }, [change])

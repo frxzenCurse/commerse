@@ -1,7 +1,7 @@
 import { Radio, Space } from 'antd';
 import MyCheckbox from '../UI/MyCheckbox';
 import MyRadioBtn from '../UI/MyRadioBtn';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router';
 import qs from 'qs'
 
@@ -30,7 +30,7 @@ const FilterList = ({ values, multiple, filter, }) => {
           />
         )
         :
-        <Radio.Group defaultValue={value ? value : null} onChange={e => setValue(e.target.value)}>
+        <Radio.Group value={value} onChange={e => setValue(e.target.value)}>
           {values.map(item =>
             <MyRadioBtn key={item.value} init={setSingle} filter={filter} change={value} value={item.value}>{item.title}</MyRadioBtn>
           )}
