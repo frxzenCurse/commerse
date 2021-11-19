@@ -1,32 +1,70 @@
 import { Checkbox } from "antd"
 import { useEffect, useState } from "react"
 import { useHistory, useLocation } from "react-router"
+import qs from 'qs'
 
 const MyCheckbox = ({ value, filter }) => {
 
+  const [isMounted, setIsMounted] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const url = useLocation()
   const history = useHistory()
 
 
   useEffect(() => {
-    if (isChecked) {
-      history.push(`?${url.search.substr(1)}` + `${url.search ? '&' : ''}${value}=${filter.value}`)
-    } else {
-      if (url.search) {
-        const y = `${value}=${filter.value}`
-        const result = url.search.match(y)
-        if (result) {
-          const x = url.search.substr(result.index - 1, y.length + 1)
+    if (url.search) {
+      const id = qs.parse(url.search, { ignoreQueryPrefix: true })
 
-          history.push(url.search.replace(x, ''))
+      if (id[value]) {
+        if (id[value].length > 1) {
+          const result = id[value].map(Number).filter(item => item === filter.value)
+
+          if (result.length) {
+            setIsChecked(true)
+          }
+        } else {
+          if (Number(id[value]) === filter.value) {
+
+            setIsChecked(true)
+          }
+        }
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isMounted) {
+
+      if (isChecked) {
+        history.push({
+          search: `${url.search.substr(1)}` + `${url.search ? '&' : ''}${value}=${filter.value}`
+        })
+      } else {
+        const search = qs.parse(url.search, { ignoreQueryPrefix: true })
+
+        if (search[value].length > 1) {
+          search[value] = search[value].filter(item => +item !== filter.value)
+
+          history.push({
+            search: qs.stringify(search, { indices: false })
+          })
+        } else {
+          delete search[value]
+          history.push({
+            search: qs.stringify(search)
+          })
         }
       }
     }
   }, [isChecked])
 
+  function onChange() {
+    setIsMounted(true)
+    setIsChecked(!isChecked)
+  }
+
   return (
-    <Checkbox checked={isChecked} onChange={() => setIsChecked(!isChecked)}>{filter.title}</Checkbox>
+    <Checkbox checked={isChecked} onChange={onChange}>{filter.title}</Checkbox>
   )
 }
 

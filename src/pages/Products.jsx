@@ -8,6 +8,8 @@ import ProjectList from '../components/ProjectList';
 import Filters from '../components/Filters';
 import { useFetching } from '../hooks/useFetching';
 import { Projects } from '../API/PostService';
+import { useLocation } from 'react-router';
+import qs from 'qs'
 
 const { Content } = Layout;
 
@@ -22,7 +24,7 @@ const Products = () => {
     square: [],
     view: "",
   })
-
+  const { search } = useLocation()
   const { products, isLoading, error, total } = useSelector(state => state.products)
   const { fetchProducts, loadMore } = useActions(productsActionCreators)
   const [loadMoreProducts, loading, typeError] = useFetching(async () => {
@@ -45,20 +47,35 @@ const Products = () => {
     }
   }, [page])
 
-  function updateParams(item, value) {
-    if (value.length > 1) {
-      setParams({ ...params, [item]: [...value].map(Number) });
+  useEffect(() => {
+    if (search) {
+      const url = qs.parse(search, { ignoreQueryPrefix: true })
+
+      for (let key in url) {
+        if (url[key].length > 1) {
+          setParams({ ...params, [key]: url[key].map(Number) });
+        } else {
+          setParams({ ...params, [key]: [url[key]].map(Number) });
+        }
+      }
     } else {
-      setParams({ ...params, [item]: [value].map(Number) });
+      setParams({
+        buildingTypeId: [],
+        objectTypeId: [],
+        priceSegmentId: [],
+        roomId: [],
+        square: [],
+        view: "",
+      })
     }
-  }
+  }, [search])
 
   return (
     <div className='container'>
       <Content>
         <Row justify='space-between'>
           <Col span={4}>
-            <Filters onChange={updateParams}/>
+            <Filters />
           </Col>
           <Col span={18}>
             {error && <h1 style={{ color: 'red' }}>{error}</h1>}
@@ -82,7 +99,6 @@ const Products = () => {
             }
           </Col>
         </Row>
-        <canvas id='canvas'></canvas>
       </Content>
     </div>
   )
