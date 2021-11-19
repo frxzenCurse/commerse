@@ -51,7 +51,7 @@ const MyCheckbox = ({ value, filter }) => {
         } else {
           delete search[value]
           history.push({
-            search: qs.stringify(search)
+            search: qs.stringify(search, { indices: false })
           })
         }
       }
