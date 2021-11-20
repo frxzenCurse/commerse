@@ -12,7 +12,7 @@ import { userActionCreators } from './redux/reducers/user/actionCreators';
 
 function App() {
 
-  const { setUsername, setAuth } = useActions(AuthActionCreators)
+  const { setAuth } = useActions(AuthActionCreators)
   const { fetchUser } = useActions(userActionCreators)
   const { addItem } = useActions(cartActionCreators)
   const { isAuth } = useSelector(state => state.login)
@@ -24,7 +24,6 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
-      setUsername(localStorage.getItem('username'))
       setAuth(true)
     }
 
@@ -43,6 +42,8 @@ function App() {
       fetchUser(localStorage.getItem('auth'))
     }
   }, [isAuth])
+
+  console.log(isAuth);
 
   return (
     <BrowserRouter>

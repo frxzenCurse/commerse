@@ -1,4 +1,4 @@
-import { SET_AUTH, SET_ERROR, SET_IS_LOADING, SET_USERNAME } from "./actions"
+import { SET_AUTH, SET_ERROR, SET_IS_LOADING } from "./actions"
 
 const initialState = {
   isAuth: false,
@@ -10,8 +10,6 @@ const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTH:
       return {...state, isAuth: action.payload, isLoading: false}
-    case SET_USERNAME:
-      return {...state, username: action.payload}
     case SET_ERROR:
       return {...state, error: action.payload, isLoading: false}
     case SET_IS_LOADING:

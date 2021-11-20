@@ -20,8 +20,8 @@ const Products = () => {
     objectTypeId: [],
     priceSegmentId: [],
     roomId: [],
-    square: [],
-    view: "",
+    squareId: [],
+    view: "projectMain",
   }
   const [page, setPage] = useState(1)
   const [params, setParams] = useState({ ...initialParams })
