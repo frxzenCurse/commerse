@@ -49,3 +49,15 @@ export const User = {
     })
   }
 }
+
+export const Auth = {
+  authLogin: (username, password) => {
+    return axios.post('https://api.d4u.dev.dterra.eu/oauth/token', {
+      grant_type: "password",
+      client_id: 2,
+      client_secret: "64f2h5RwqflA5FKBCFwhuXlPhtHibpAyxgviS3WX",
+      username: username,
+      password: password,
+    })
+  }
+}

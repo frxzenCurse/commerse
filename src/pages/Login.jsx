@@ -1,11 +1,13 @@
 import { Form, Input, Button, Row, Result } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router';
 import { PRODUCTS } from '../data/pages';
 import { useActions } from '../hooks/useActions';
 import { AuthActionCreators } from '../redux/reducers/login/actionCreators';
 import { useSpring, animated } from 'react-spring';
+import { Auth } from '../API/PostService';
+
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -14,37 +16,42 @@ const formItemLayout = {
 
 const Login = () => {
 
+  const [isSuccess, setIsSuccess] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const history = useHistory()
 
-  const { error, isLoading, isAuth } = useSelector(state => state.login)
-  const { login, setError } = useActions(AuthActionCreators)
+  const { error, isLoading } = useSelector(state => state.login)
+  const { setError, setIsLoading, setAuth } = useActions(AuthActionCreators)
 
   const formProps = useSpring({
     config: { duration: 400 },
-    x: isAuth ? -40 : 0,
-    opacity: isAuth ? 0 : 1
+    x: isSuccess ? -40 : 0,
+    opacity: isSuccess ? 0 : 1,
+    onRest: () => api.start({scale: isSuccess ? 1 : 0})
   })
-  const resultProps = useSpring({
-    delay: 400,
+  const [resultProps, api] = useSpring(() => ({
     config: { duration: 400 },
-    scale: isAuth ? 1.5 : 0
-  })
-
-  function sumbitHandler() {
-    login(username, password)
-  }
-
-  useEffect(() => {
-    if (isAuth) {
-      setTimeout(() => {
-        history.push(PRODUCTS)
-      }, 1000)
-      setError('')
+    scale: 0,
+    onRest: () => {
+      history.push(PRODUCTS)
+      setAuth(true)
     }
-  }, [isAuth])
+  }))
+
+  async function sumbitHandler() {
+    setIsLoading(true)
+    try {
+      const response = await Auth.authLogin(username, password)
+
+      localStorage.setItem('auth', response.data.access_token)
+      setIsSuccess(true)
+      setError('')
+    } catch (e) {
+      setError('Неверный логин или пароль!')
+    }
+  }
 
   return (
     <div>

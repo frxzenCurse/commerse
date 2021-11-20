@@ -43,8 +43,6 @@ function App() {
     }
   }, [isAuth])
 
-  console.log(isAuth);
-
   return (
     <BrowserRouter>
       <Header onClick={onClick} />
