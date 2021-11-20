@@ -2,8 +2,6 @@ import { Button } from "antd";
 import { useHistory, useParams } from "react-router";
 import { PRODUCTS } from "../data/pages";
 import { useEffect, useState } from 'react'
-import { useActions } from "../hooks/useActions";
-import { productsActionCreators } from "../redux/reducers/products/actionCreators";
 import { useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import SingleProjectCard from "../components/SingleProjectCard";
@@ -29,7 +27,7 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     fetchProject()
-  }, [])  
+  }, [id])  
 
   function modalHandler() {
     if (!isAuth) {

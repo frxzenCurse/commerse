@@ -47,3 +47,70 @@ export const routes = [
     component: Page404,
   },
 ]
+
+
+export const publicRoutes = [
+  {
+    path: '/',
+    render: () => <Redirect to={PRODUCTS} />
+  },
+  {
+    path: PRODUCTS,
+    component: Products,
+  },
+  {
+    path: PRODUCTS + '/:id',
+    component: ProjectDetail,
+  },
+  {
+    path: LOGIN,
+    component: Login,
+  },
+  {
+    path: POSTS,
+    component: Posts,
+  },
+  {
+    path: POST + '/:id',
+    component: Post,
+  },
+  {
+    path: PAGE404,
+    component: Page404,
+  },
+]
+
+export const privateRoutes = [
+  {
+    path: '/',
+    render: () => <Redirect to={PRODUCTS} />
+  },
+  {
+    path: PRODUCTS,
+    component: Products,
+  },
+  {
+    path: PRODUCTS + '/:id',
+    component: ProjectDetail,
+  },
+  {
+    path: CART,
+    component: Cart,
+  },
+  {
+    path: PROFILE,
+    component: Profile,
+  },
+  {
+    path: POSTS,
+    component: Posts,
+  },
+  {
+    path: POST + '/:id',
+    component: Post,
+  },
+  {
+    path: PAGE404,
+    component: Page404,
+  },
+]

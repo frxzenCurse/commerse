@@ -12,6 +12,7 @@ import { userActionCreators } from './redux/reducers/user/actionCreators';
 
 function App() {
 
+  const [isLoading, setIsLoading] = useState(true)
   const { setAuth } = useActions(AuthActionCreators)
   const { fetchUser } = useActions(userActionCreators)
   const { addItem } = useActions(cartActionCreators)
@@ -23,9 +24,11 @@ function App() {
   }
 
   useEffect(() => {
+
     if (localStorage.getItem('auth')) {
       setAuth(true)
-    }
+    } 
+    setIsLoading(false)
 
     if (localStorage.getItem('cartItems')) {
       const array = JSON.parse(localStorage.getItem('cartItems'))
@@ -42,11 +45,11 @@ function App() {
       fetchUser(localStorage.getItem('auth'))
     }
   }, [isAuth])
-
+  
   return (
     <BrowserRouter>
       <Header onClick={onClick} />
-      <AppRouter />
+      <AppRouter isLoading={isLoading} />
       {!isAuth &&
         <MyModal isModalVisible={isVisible} onClick={onClick} />}
     </BrowserRouter>
