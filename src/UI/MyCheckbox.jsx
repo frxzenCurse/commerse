@@ -10,7 +10,6 @@ const MyCheckbox = ({ value, filter }) => {
   const url = useLocation()
   const history = useHistory()
 
-
   useEffect(() => {
     if (url.search) {
       const id = qs.parse(url.search, { ignoreQueryPrefix: true })
@@ -29,8 +28,10 @@ const MyCheckbox = ({ value, filter }) => {
           }
         }
       }
+    } else {
+      setIsChecked(false)
     }
-  }, [])
+  }, [url.search])
 
   useEffect(() => {
     if (isMounted) {
@@ -42,17 +43,19 @@ const MyCheckbox = ({ value, filter }) => {
       } else {
         const search = qs.parse(url.search, { ignoreQueryPrefix: true })
 
-        if (search[value].length > 1) {
-          search[value] = search[value].filter(item => +item !== filter.value)
+        if (url.search) {
+          if (search[value].length > 1) {
+            search[value] = search[value].filter(item => +item !== filter.value)
 
-          history.push({
-            search: qs.stringify(search, { indices: false })
-          })
-        } else {
-          delete search[value]
-          history.push({
-            search: qs.stringify(search, { indices: false })
-          })
+            history.push({
+              search: qs.stringify(search, { indices: false })
+            })
+          } else {
+            delete search[value]
+            history.push({
+              search: qs.stringify(search, { indices: false })
+            })
+          }
         }
       }
     }

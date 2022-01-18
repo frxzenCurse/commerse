@@ -1,7 +1,7 @@
 import { Radio, Space } from 'antd';
 import MyCheckbox from '../UI/MyCheckbox';
 import MyRadioBtn from '../UI/MyRadioBtn';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import qs from 'qs'
 
@@ -10,13 +10,18 @@ const FilterList = ({ values, multiple, filter, }) => {
   const [value, setValue] = useState(0)
   const { search } = useLocation()
 
-
   function setSingle(filter) {
     if (search) {
       const id = qs.parse(search, { ignoreQueryPrefix: true })
       if (id[filter]) setValue(Number(id[filter]))
     }
   }
+
+  useEffect(() => {
+    if (!search && value) {
+      setValue(0)
+    }
+  }, [search])
 
   return (
     <Space direction='vertical'>

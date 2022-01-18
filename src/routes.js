@@ -9,46 +9,6 @@ import { Redirect } from "react-router";
 import ProjectDetail from "./pages/ProjectDetail";
 import Profile from "./pages/Profile";
 
-export const routes = [
-  {
-    path: '/',
-    render: () => <Redirect to={PRODUCTS} />
-  },
-  {
-    path: PRODUCTS,
-    component: Products,
-  },
-  {
-    path: PRODUCTS + '/:id',
-    component: ProjectDetail,
-  },
-  {
-    path: CART,
-    component: Cart,
-  },
-  {
-    path: PROFILE,
-    component: Profile,
-  },
-  {
-    path: POSTS,
-    component: Posts,
-  },
-  {
-    path: POST + '/:id',
-    component: Post,
-  },
-  {
-    path: LOGIN,
-    component: Login,
-  },
-  {
-    path: PAGE404,
-    component: Page404,
-  },
-]
-
-
 export const publicRoutes = [
   {
     path: '/',
@@ -76,7 +36,7 @@ export const publicRoutes = [
   },
   {
     path: PAGE404,
-    component: Page404,
+    render: () => <Redirect to={PRODUCTS} />
   },
 ]
 
@@ -111,6 +71,6 @@ export const privateRoutes = [
   },
   {
     path: PAGE404,
-    component: Page404,
+    render: () => <Redirect to={PRODUCTS} />
   },
 ]
